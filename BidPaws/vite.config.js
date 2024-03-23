@@ -8,4 +8,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public/build', // Répertoire de sortie
+        manifest: true, // Générer un fichier de manifeste
+        sourcemap: true, // Générer des sourcemaps pour le débogage
+    },
 });
+
