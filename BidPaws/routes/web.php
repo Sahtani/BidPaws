@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/Auth', function () {
-    return view('user.Auth');})->name('Auth');
+
+    Route::prefix('auth')->name('auth.')->group(function () {
+        Route::get('/sign-up', [AuthController::class,'showRegistrationForm'])->name('sign-up');
+        Route::post('/register', [AuthController::class, 'register'])->name('regsiter');
+
+    });

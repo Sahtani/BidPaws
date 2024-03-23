@@ -248,12 +248,8 @@ label.active {
                             <div class="bg-white rounded w-full relative z-10 py-1">
                                 <ul class="list-reset text-950 font-semibold">
                                     <li>
-                                        <a href="{{ route('Auth') }}" class="px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer"> <span class="flex-1">Login</span> </a>
+                                        <a href="{{ route('auth.sign-up') }}" class="px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer"> <span class="flex-1">Login / Register</span> </a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer"> <span class="flex-1">Register</span> </a>
-                                    </li>
-                                  
                                 </ul>
                             </div>
                         </div>
