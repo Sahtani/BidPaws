@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <!-- Sign up form -->
+    <form id="signup-form" action="signup_process.php" method="post">
+        <!-- Your sign-up form fields here -->
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <!-- Link to switch to login -->
+    <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+
+    <script>
+        $(document).ready(function() {
+            $('#login-link').click(function(e) {
+                e.preventDefault();
+                loadLoginForm();
+            });
+
+            function loadLoginForm() {
+                $.get("{{ route('login') }}", function(data) {
+                    $('body').html(data);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

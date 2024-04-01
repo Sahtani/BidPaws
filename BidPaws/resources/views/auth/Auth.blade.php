@@ -8,22 +8,22 @@
         <div class="flex items-center justify-center">
 
 
-            <div class="form h-fit  bg-white border w-full ">
+            <div class="form h-fit  bg-white border md:w-3/5 ">
 
                 <ul class="tab-group">
-                    <li class="tab active "><a href="#signup">Sign Up</a></li>
-                    <li class="tab"><a href="#login">Log In</a></li>
+                    <li class="tab active "><a href="#signup" >Sign Up</a></li>
+                    <li class="tab"><a href="#login" id="login-link">Log In</a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div id="signup">
-                        <form action="{{route('auth.regsiter')}}" method="post" enctype="multipart/form-data">
-                          @csrf
-                          <div class="flex items-center border-2   mb-4">
-                            <input type="file" name="image"
-                              class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black " />
-                   
-                          </div>
+                    <div id="signup-form">
+                        <form action="{{ route('auth.regsiter') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="flex items-center border-2   mb-4">
+                                <input type="file" name="image"
+                                    class="w-full text-black text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-black " />
+
+                            </div>
 
                             <div class="flex items-center border-2 py-2 px-3  mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
@@ -53,7 +53,7 @@
                                     </path>
                                 </svg>
                                 <input class="pl-2 outline-none border-none w-full" type="text" name="email"
-                                    id="" placeholder="Email Address">
+                                    id="email" placeholder="Email Address">
                             </div>
 
                             <div class="flex items-center border-2 py-2 px-3 ">
@@ -63,22 +63,21 @@
                                         d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <input class="pl-2 outline-none border-none w-full" type="text" name="password"
-                                    id="" placeholder="Password">
+                                <input class="pl-2 outline-none border-none w-full" type="password" name="password"
+                                    id="password" placeholder="Password">
                             </div>
 
                             <button type="submit" class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2">Sign
                                 Up</button>
 
                         </form>
-
                     </div>
 
                     <div id="login">
                         <h1>Welcome Back!</h1>
 
-                        <form action="/" method="post">
-
+                        <form action="{{ route('auth.login') }}" method="post">
+                            @csrf
                             <div class="flex items-center border-2 py-2 px-3  mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -86,10 +85,10 @@
                                         d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
                                     </path>
                                 </svg>
-                                <input class="pl-2 outline-none border-none w-full" type="text" name=""
+                                <input class="pl-2 outline-none border-none w-full" type="text" name="email"
                                     id="" placeholder="Email Address">
                             </div>
-
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             <div class="flex items-center border-2 py-2 px-3 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -97,18 +96,23 @@
                                         d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <input class="pl-2 outline-none border-none w-full" type="text" name=""
+                                <input class="pl-2 outline-none border-none w-full" type="password" name="password"
                                     id="" placeholder="Password">
+                                   
                             </div>
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             <p class="forgot"><a href="#">Forgot Password?</a></p>
-
+                            <div>
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label for="remember">Remember me</label>
+                            </div>
                             <button type="submit"
                                 class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2">Log
                                 In</button>
                             <div class=" grid space-y-4">
                                 <button
                                     class="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
-       hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
+                                    hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
                                     <div class="relative flex items-center space-x-4 justify-center">
                                         <img src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
                                             class="absolute left-0 w-5" alt="google logo">

@@ -1,10 +1,10 @@
-@extends('layouts.nav')
+@extends('layouts.base')
 
 @section('content')
 <div class="">
 
 
-    <section class="container  mx-auto px-4 sm:px-6 lg:px-8  relative">
+    <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
         <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
             <h1
                 class="font-bold pt-20 pl-4 md:pl-8 text-4xl text-950  transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
