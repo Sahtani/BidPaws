@@ -11,7 +11,8 @@
             <p class="text-lg mb-8">Experience excellence like never before with our exclusive products and services.</p>
 
 
-            <form action="" class="mx-auto">
+            <form action="{{ url('user/annonces') }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+                @csrf
                 <div class="grid grid-cols-3 gap-6 ">
                     <div class="grid col-start-1  col-end-3">
                         <div class="flex flex-col">
@@ -20,8 +21,10 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="title" class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="text" name="title" value="{{ old('title') }}"
+                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
+                            <x-input-error :messages="$errors->get('title')" class="my-2" />
                         </div>
                     </div>
                     <div class="grid col-start-1  col-end-1">
@@ -31,8 +34,10 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text"  class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="text" name="category" value="{{ old('category') }}"
+                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
+                            <x-input-error :messages="$errors->get('category')" class="my-2" />
                         </div>
                     </div>
                     <div class="grid col-start-2  col-end-2">
@@ -42,21 +47,23 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="price" class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="number" name="price" value="{{ old('price') }}"
+                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
+                            <x-input-error :messages="$errors->get('price')" class="my-2" />
                         </div>
                     </div>
-                    <div class="grid col-start-3 col-end-3">
+                    {{-- <div class="grid col-start-3 col-end-3">
                         <div class="flex flex-col">
                             <div class="flex ">
                                 <label for="">Adoption</label>
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text"  class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="text" class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="grid col-start-1 col-end-1">
                         <div class="flex flex-col">
                             <div class="flex ">
@@ -64,11 +71,11 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="city" class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="text" name="location" value="{{ old('city') }}"
+                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
+                            <x-input-error :messages="$errors->get('location')" class="my-2" />
                         </div>
-
-
                     </div>
                     <div class="grid col-start-2 col-end-2">
                         <div class="flex flex-col">
@@ -77,8 +84,10 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="city" class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
+                                <input type="text" name="age" value="{{ old('age') }}"
+                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm">
                             </div>
+                            <x-input-error :messages="$errors->get('age')" class="my-2" />
                         </div>
 
 
@@ -87,9 +96,10 @@
                 </div>
                 <div class="mb-8 mt-6">
                     <label class="text-xl font-bold mb-4">Description <span class="text-red-500">*</span></label></br>
-                    <textarea name="content" class="border-2 border-gray-500">
-                        
+                    <textarea name="description" class="border-2 border-gray-500">
+                      {{ old('title') }}"
                     </textarea>
+                    <x-input-error :messages="$errors->get('description')" class="my-2" />
                 </div>
                 <div class=" mt-6">
                     <h3 class="text-xl font-bold mb-4">Upload photos (3 photos max.)
@@ -108,7 +118,7 @@
                                     <label for="file-upload"
                                         class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                         <span>Upload a file</span>
-                                        <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                        <input id="file-upload" name="images[]" type="file" multiple class="sr-only">
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
@@ -117,11 +127,46 @@
                         </div>
                     </div>
                 </div>
+                <x-input-error :messages="$errors->get('images')" class="my-2" />
         </div>
 
 
 
     </div>
+    <div class="flex flex-raw">
+        <button type="submit" class="bg-yell  text-white font-bold py-2 px-4 rounded">
+            <span>Publier une annonce
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path
+                        d="M5.00488 11.525V7.075H0.854883V5.125H5.00488V0.65H7.00488V5.125H11.1549V7.075H7.00488V11.525H5.00488Z"
+                        fill="#FDFDFE"></path>
+                </svg>
+            </span>
+
+            <svg width="40" height="10" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#fff"
+                class="animate-spin h-4 w-4 ml-2">
+                <circle cx="15" cy="15" r="15">
+                    <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s"
+                        values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                    <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s"
+                        values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                </circle>
+                <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                    <animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s"
+                        values="9;15;9" calcMode="linear" repeatCount="indefinite"></animate>
+                    <animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s"
+                        values=".5;1;.5" calcMode="linear" repeatCount="indefinite"></animate>
+                </circle>
+                <circle cx="105" cy="15" r="15">
+                    <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s"
+                        values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                    <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s"
+                        values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                </circle>
+            </svg>
+        </button>
+    </div>
+    
 
     </form>
     </div>

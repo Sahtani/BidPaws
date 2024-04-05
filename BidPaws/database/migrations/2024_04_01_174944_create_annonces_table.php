@@ -17,12 +17,14 @@ return new class extends Migration
             $table->text('description');
             $table->float('price');
             $table->string('location');
-            $table->int('age');
+            $table->integer('age'); 
+            $table->json('image')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'refused'])->default('pending');
+            $table->foreignIdFor('user')->constrained()->onDelete('cascade');
             $table->timestamps();
-
         });
     }
+    
 
     /**
      * Reverse the migrations.

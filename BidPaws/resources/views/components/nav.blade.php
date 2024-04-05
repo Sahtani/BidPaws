@@ -104,7 +104,7 @@
                                                             <span class="flex-1">Add announcement </span> </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('sign-up') }}"
+                                                        <a href="{{ route('user.my-listings') }}"
                                                             class="hover:text-yell px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer">
                                                             <span class="flex-1">my listings</span> </a>
                                                     </li>
@@ -177,7 +177,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class=" bg-white shadow-md rounded border border-gray-300 text-sm absolute top-auto left-0 min-w-full w-56 z-30 mt-1"
+                                <div class=" bg-white shadow-md uppearcase rounded border border-gray-300 text-sm absolute top-auto left-0 min-w-full w-56 z-30 mt-1"
                                     x-show="showChildren" x-transition:enter="transition ease duration-300 transform"
                                     x-transition:enter-start="opacity-0 translate-y-2"
                                     x-transition:enter-end="opacity-100 translate-y-0"

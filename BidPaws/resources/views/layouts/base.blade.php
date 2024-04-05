@@ -196,7 +196,7 @@ label.active {
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <script>
-    CKEDITOR.replace( 'content' );
+    CKEDITOR.replace( 'description' );
 </script>
 <x-footer/>
 </body>
