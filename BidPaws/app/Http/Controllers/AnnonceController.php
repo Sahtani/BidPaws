@@ -18,7 +18,18 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        //
+
+        $annonces = Annonce::with('images')->paginate(10); // 10 annonces par page, vous pouvez ajuster cela selon vos besoins
+
+        return view('allannonces', compact('annonces'));
+    }
+
+    public function recentAnnouncements()
+    {
+
+        $annonces = Annonce::with('images')->latest()->get();
+
+        return view('home', compact('annonces'));
     }
 
     /**
@@ -36,27 +47,27 @@ class AnnonceController extends Controller
     {
         // Validate the request data
         $validatedData = $request->validated();
-    
+
         // Get the authenticated user
         $user = User::find(Auth::user()->id);
-    
+
         // Create a new annonce with the validated data
         $annonce = $user->annonces()->create($validatedData);
-    
+
         // Check if images are provided in the request
         if ($request->hasFile('images')) {
             // Process and store each image
             foreach ($request->file('images') as $image) {
                 $imagePath = $image->store('public/images');
-    
-                $annonce->images()->create(['image_path' => $imagePath]);
+
+                $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }
-    
+
         // Redirect with success message
-        return redirect()->route('annonces.index')->with('success', 'Annonce créée avec succès.');
+        return redirect()->route('user.my-listings')->with('success', 'Annonce créée avec succès.');
     }
-    
+
 
 
     /**
@@ -66,12 +77,12 @@ class AnnonceController extends Controller
     {
         //
     }
-    public function myListings(){
-        $user_id=Auth::user()->id;
-        $mylistings=Annonce::where('user_id',$user_id)->with('images')->get();
-        return view('user.user-annonces',compact('mylistings'));
-     
-   }
+    public function myListings()
+    {
+        $user_id = Auth::user()->id;
+        $mylistings = Annonce::where('user_id', $user_id)->with('images')->get();
+        return view('user.user-annonces', compact('mylistings'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
