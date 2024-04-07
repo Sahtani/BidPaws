@@ -27,7 +27,7 @@
                         <div class="md:flex">
                             <div class="circle"></div>
                             <li>
-                                <a href="#" type="button"
+                                <a href="{{ route('home') }}" type="button"
                                     class=" uppercase font-semibold hover:text-yell focus:outline-none  text-sm px-6 py-2.5 text-center">Home</a>
 
                             </li>
