@@ -3,9 +3,11 @@
 use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -51,6 +53,7 @@ Route::middleware(['auth,user'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/categories',[CategoryController::class,'index'])->name('categories');
     });
 });
 
