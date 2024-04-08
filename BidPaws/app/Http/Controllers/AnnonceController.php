@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AnnonceRequest;
 use App\Models\Annonce;
+use App\Models\AnnonceImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -58,12 +59,12 @@ class AnnonceController extends Controller
         if ($request->hasFile('images')) {
             // Process and store each image
             foreach ($request->file('images') as $image) {
-                $imagePath = $image->store('public/images');
-
+                $image = $image->store('public/annonceImages');
+                $imagePath = explode("/", $image);
+                // $annonceImages=AnnonceImage::create(['image_path' => $imagePath[2], 'annonce_id' => $annonce->id]);
                 $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }
-
         // Redirect with success message
         return redirect()->route('user.my-listings')->with('success', 'Annonce créée avec succès.');
     }
@@ -73,9 +74,14 @@ class AnnonceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $annonce = Annonce::findOrFail($id);
+        
+        // Incrémenter les vues chaque fois que l'annonce est vue
+        $annonce->increment('views');
+    
+        return view('annonce.show', compact('annonce'));
     }
     public function myListings()
     {

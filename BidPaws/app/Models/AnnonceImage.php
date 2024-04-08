@@ -10,6 +10,9 @@ class AnnonceImage extends Model
     use HasFactory;
     protected $fillable = [
         'image_path',
-        // other fillable attributes...
+       ' annonce_id'
     ];
+    public function annonces(){
+        return  $this->belongsTo(Annonce::class,'annonce_id');
+    }
 }

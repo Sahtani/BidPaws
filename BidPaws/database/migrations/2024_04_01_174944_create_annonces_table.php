@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('image')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'refused'])->default('pending');
             $table->foreignIdFor('user')->constrained()->onDelete('cascade');
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }
