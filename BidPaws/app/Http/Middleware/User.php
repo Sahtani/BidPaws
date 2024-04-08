@@ -15,6 +15,11 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if ($request->user() && $request->user()->role === 'user') {
+            return $next($request);
+        }elseif($request->user()->role === 'admin'){
+            return redirect()->route('admin.stats');
+        }
+
     }
 }
