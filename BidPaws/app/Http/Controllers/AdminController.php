@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    
     public function toggleAccess(User $user)
     {
         $user->update(['access' => !$user->access]);
@@ -25,5 +26,17 @@ class AdminController extends Controller
     {
         $events = Annonce::all();
         return view('admin.events', compact('events'));
+    }
+
+    public function validateAnnoces(Annonce $annoce)
+    {
+        if ($annoce->status === 'accepted') {
+            $annoce->status = 'refused';
+        } else {
+            $annoce->status = 'accepted';
+        }
+    
+        $annoce->save();
+        return back()->with('success', 'Annoce confirmed successfully.');
     }
 }
