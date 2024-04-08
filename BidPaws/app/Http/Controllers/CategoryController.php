@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class CategoryController extends Controller
 {
@@ -28,7 +30,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:categories|max:255',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->save();
+        return back()->with('success', 'Category created successfully.');
     }
 
     /**
