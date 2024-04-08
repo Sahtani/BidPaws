@@ -86,8 +86,8 @@ class AnnonceController extends Controller
     public function myListings()
     {
         $user_id = Auth::user()->id;
-        $mylistings = Annonce::where('user_id', $user_id)->with('images')->get();
-        return view('user.user-annonces', compact('mylistings'));
+        $annonces = Annonce::where('user_id', $user_id)->with('images')->get();
+        return view('user.user-annonces', compact('annonces'));
     }
     /**
      * Show the form for editing the specified resource.
