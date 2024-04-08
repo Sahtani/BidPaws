@@ -18,6 +18,7 @@ class Annonce extends Model
         'location',
         'age',
         'status', 
+        'role'
     ];
 
 
