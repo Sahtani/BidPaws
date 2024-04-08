@@ -51,7 +51,7 @@ class AnnonceController extends Controller
 
         // Get the authenticated user
         $user = User::find(Auth::user()->id);
-
+        $user->role='user';
         // Create a new annonce with the validated data
         $annonce = $user->annonces()->create($validatedData);
 
