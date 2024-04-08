@@ -13,4 +13,10 @@ class AdminController extends Controller
         $user->update(['access' => !$user->access]);
         return redirect()->back()->with('success', 'Access toggled successfully.');
     }
+
+    public function users()  
+    {
+        $users = User::where('role', 'user')->get();
+        return view('admin.dashboard', compact('users'));
+    }
 }
