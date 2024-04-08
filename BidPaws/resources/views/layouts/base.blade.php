@@ -197,10 +197,13 @@
 </head>
 
 <body class="bg-gray-100 font-[sans-serif]">
+    @user
     <x-nav />
-    @auth
-        <x-nav-user />
-    @endauth
+    @enduser
+  
+    @admin
+       <x-nav-aside/> 
+    @endadmin
     <section>
         @yield('content')
     </section>
@@ -221,7 +224,10 @@
         },
     });
     </script>
+    @user
     <x-footer />
+    @enduser
+   
 
 </body>
 

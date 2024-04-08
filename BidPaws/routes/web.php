@@ -47,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
+
 // Profile user
 
 Route::middleware('auth')->group(function () {
