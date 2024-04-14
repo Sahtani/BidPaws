@@ -12,9 +12,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('access')->default(0); 
+            $table->boolean('access')->default(false);
         });
     }
+    
 
     /**
      * Reverse the migrations.
@@ -22,8 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('access');
+            //
         });
     }
-    
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\AuthController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -32,10 +34,10 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
 
-    Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
-    Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
+Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 
@@ -53,7 +55,14 @@ Route::middleware(['auth,user'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/categories',[CategoryController::class,'index'])->name('categories');
+        Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+        Route::get('/admindashboard',[AdminController::class,'users'])->name('users');
+        Route::patch('/toggleAccess/{user}',[AdminController::class,'toggleAccess'])->name('toggleAccess');
+        Route::post('/storecat', [CategoryController::class, 'store'])->name('storecat');
+        Route::delete('/destroycat/{id}', [CategoryController::class, 'destroy'])->name('destroycat');
+        Route::put('/update', [CategoryController::class, 'update'])->name('update');
+        // stats
+        // Route::get('/stats',[StatisticsController::class,'index'])->name('stats');
     });
 });
 
@@ -61,7 +70,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 // Profile user
 
-Route::middleware(['auth','user'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

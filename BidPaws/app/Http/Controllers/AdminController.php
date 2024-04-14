@@ -9,17 +9,23 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    
+
     public function toggleAccess(User $user)
-    {
-        $user->update(['access' => !$user->access]);
-        return redirect()->back()->with('success', 'Access toggled successfully.');
+    { 
+        try {
+            $user->access = !$user->access;
+            $user->update();
+           
+            return redirect()->back()->with('success', 'Access toggled successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to toggle access.');
+        }
     }
 
-    public function users()  
+    public function users()
     {
         $users = User::where('role', 'user')->get();
-        return view('admin.dashboard', compact('users'));
+        return view('admin.users', compact('users'));
     }
 
     public function annoces()
@@ -35,7 +41,7 @@ class AdminController extends Controller
         } else {
             $annoce->status = 'accepted';
         }
-    
+
         $annoce->save();
         return back()->with('success', 'Annoce confirmed successfully.');
     }
