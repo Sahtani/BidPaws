@@ -92,10 +92,15 @@ class AnnonceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Récupérer l'annonce à éditer avec sa catégorie et ses images
+        $annonce = Annonce::with('category', 'images')->findOrFail($id);
+    
+        // Afficher le formulaire d'édition avec les données de l'annonce
+        return view('annonces.edit', compact('annonce'));
     }
+    
 
     /**
      * Update the specified resource in storage.
