@@ -100,10 +100,39 @@ class AnnonceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Valider les données entrantes
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'location' => 'required|string',
+            'age' => 'required|integer',
+            'image' => 'nullable|json',
+            'status' => 'nullable|string|in:pending,confirmed,refused',
+            'views' => 'nullable|integer',
+        ]);
+    
+        // Mettre à jour l'annonce
+        $annonce = Annonce::findOrFail($id);
+        $annonce->title = $validatedData['title'];
+        $annonce->description = $validatedData['description'];
+        $annonce->price = $validatedData['price'];
+        $annonce->location = $validatedData['location'];
+        $annonce->age = $validatedData['age'];
+        $annonce->image = $validatedData['image'];
+        if (isset($validatedData['status'])) {
+            $annonce->status = $validatedData['status'];
+        }
+        if (isset($validatedData['views'])) {
+            $annonce->views = $validatedData['views'];
+        }
+        $annonce->save();
+    
+        return response()->json(['message' => 'Annonce mise à jour avec succès', 'data' => $annonce]);
     }
+    
 
     /**
      * Remove the specified resource from storage.
