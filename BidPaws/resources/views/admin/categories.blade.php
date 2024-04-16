@@ -102,7 +102,6 @@
             @endforeach
         </div>
     </div>
-@endsection
 
 
 <!-- add -->

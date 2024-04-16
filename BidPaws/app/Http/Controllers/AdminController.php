@@ -11,11 +11,11 @@ class AdminController extends Controller
 {
 
     public function toggleAccess(User $user)
-    { 
+    {
         try {
             $user->access = !$user->access;
             $user->update();
-           
+
             return redirect()->back()->with('success', 'Access toggled successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to toggle access.');
@@ -34,15 +34,17 @@ class AdminController extends Controller
         return view('admin.events', compact('events'));
     }
 
-    public function validateAnnoces(Annonce $annoce)
+    public function acceptAnnoces(Annonce $annoce)
     {
-        if ($annoce->status === 'accepted') {
-            $annoce->status = 'refused';
-        } else {
-            $annoce->status = 'accepted';
-        }
-
+        $annoce->status = 'accepted';
         $annoce->save();
-        return back()->with('success', 'Annoce confirmed successfully.');
+        return back()->with('success', 'Annoce accepted successfully.');
+    }
+
+    public function rejectAnnoces(Annonce $annoce)
+    {
+        $annoce->status = 'refused';
+        $annoce->save();
+        return back()->with('success', 'Annoce rejected successfully.');
     }
 }

@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -197,9 +198,9 @@
 </head>
 
 <body class="bg-gray-100 font-[sans-serif]">
-    @user
+    {{-- @user --}}
     <x-nav />
-    @enduser
+    {{-- @enduser --}}
   
     @admin
        <x-nav-aside/> 
