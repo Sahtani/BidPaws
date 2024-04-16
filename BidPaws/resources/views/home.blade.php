@@ -2,10 +2,7 @@
 
 
 @section('content')
-   
     <div class="">
-
-
         <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
             <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
                 <h1
@@ -249,9 +246,4 @@
             </h3>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('.carousel').carousel();
-        });
-    </script>
 @endsection
