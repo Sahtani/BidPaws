@@ -27,7 +27,7 @@ class AnnonceRequest extends FormRequest
             'price' => 'required|numeric',
             'location' => 'required|string',
             'age' => 'required|integer',
-            'images.*' => 'required|image'
+            'images.*' => 'required|image|max:3'
         ];
     }
 }

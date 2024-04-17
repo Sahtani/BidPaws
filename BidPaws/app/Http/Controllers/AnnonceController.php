@@ -106,18 +106,8 @@ class AnnonceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Valider les données entrantes
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'location' => 'required|string',
-            'age' => 'required|integer',
-            'image' => 'nullable|json',
-            'status' => 'nullable|string|in:pending,confirmed,refused',
-            'views' => 'nullable|integer',
-        ]);
-    
+       
+        $validatedData= $request->validated();
         // Mettre à jour l'annonce
         $annonce = Annonce::findOrFail($id);
         $annonce->title = $validatedData['title'];

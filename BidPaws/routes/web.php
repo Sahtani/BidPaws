@@ -41,7 +41,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 
-Route::middleware(['auth','user'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::get('/annonces', [AnnonceController::class, 'index']);
@@ -49,6 +49,7 @@ Route::middleware(['auth','user'])->group(function () {
         Route::post('/annonces', [AnnonceController::class, 'store'])->name('store');
         Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
         Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('annonces.update');
+        Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('annonces.destroy');
 
 
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');
