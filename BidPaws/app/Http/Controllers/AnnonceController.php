@@ -141,8 +141,12 @@ class AnnonceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // avec images 
+        $annonce = Annonce::findOrFail($id);
+        $annonce->delete();
+    
+        return redirect()->route('annonces.index')->with('success', 'Announcement deleted successfully.');
     }
 }
