@@ -11,7 +11,8 @@
             <p class="text-lg mb-8">Experience excellence like never before with our exclusive products and services.</p>
 
 
-            <form action="{{ url('user/annonces') }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+            <form action="{{ route('user/update',$annonce->id) }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+                @method('PATCH')
                 @csrf
                 <div class="grid grid-cols-3 gap-6">
                     <div class="grid col-start-1  col-end-3">
@@ -21,7 +22,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="title" value="{{ old('title') }}"
+                                <input type="text" name="title" value="{{ $annonce->title }}"
                                     class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('title')" class="my-2" />
@@ -34,9 +35,15 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="category" value="{{ old('category') }}"
-                                    class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
+                                <select name="category"
+                                    class="block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-yell focus:outline-none">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            @if ($category->id == old('category', $annonce->category_id)) selected @endif>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+
                             <x-input-error :messages="$errors->get('category')" class="my-2" />
                         </div>
                     </div>
@@ -47,7 +54,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="number" name="price" value="{{ old('price') }}"
+                                <input type="number" name="price" value="{{ $annonce->price }}"
                                     class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('price')" class="my-2" />
@@ -60,7 +67,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="location" value="{{ old('city') }}"
+                                <input type="text" name="location" value="{{ $annonce->location }}"
                                     class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('location')" class="my-2" />
@@ -73,7 +80,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="age" value="{{ old('age') }}"
+                                <input type="text" name="age" value="{{ $annonce->age }}"
                                     class="block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('age')" class="my-2" />
@@ -86,7 +93,7 @@
                 <div class="mb-8 mt-6">
                     <label class="text-xl font-bold mb-4">Description <span class="text-red-500">*</span></label></br>
                     <textarea name="description" class="border-2 border-gray-500">
-                      {{ old('title') }}"
+                      {{ $annonce->description }}"
                     </textarea>
                     <x-input-error :messages="$errors->get('description')" class="my-2" />
                 </div>
@@ -95,7 +102,7 @@
                         <span class="text-red-500">*</span>
                     </h3></br>
                     <div class="col-span-full">
-                        <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        {{-- <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                             <div class="text-center">
                                 <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor"
                                     aria-hidden="true">
@@ -113,7 +120,26 @@
                                 </div>
                                 <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                             </div>
+                        </div> --}}
+
+                        <div class="mt-4">
+                            <h2>Images de l'annonce</h2>
+                            <div class="grid grid-cols-3 gap-4 mt-4">
+                                @foreach ($annonce->images as $image)
+                                    <div>
+                                        <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}" alt="Image de l'annonce">
+                                        <label for="delete_image_{{ $image->id }}">Supprimer</label>
+                                        <input type="checkbox" name="delete_images[]" id="delete_image_{{ $image->id }}"
+                                            value="{{ $image->id }}">
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
+                        <div class="mt-4">
+                            <label for="new_images">Ajouter de nouvelles images :</label>
+                            <input type="file" name="new_images[]" id="new_images" multiple>
+                        </div>
+
                     </div>
                 </div>
                 <x-input-error :messages="$errors->get('images')" class="my-2" />
@@ -122,14 +148,17 @@
 
 
         <div class="flex items-center justify-end mt-10 mr-20">
-            <button type="submit" class="flex items-center justify-center gap-2 bg-yellow-500 text-white font-bold py-3 px-4 rounded">
+            <button type="submit"
+                class="flex items-center justify-center gap-2 bg-yellow-500 text-white font-bold py-3 px-4 rounded">
                 <span>Publier une annonce</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M5.00488 11.525V7.075H0.854883V5.125H5.00488V0.65H7.00488V5.125H11.1549V7.075H7.00488V11.525H5.00488Z" fill="#FDFDFE"></path>
+                    <path
+                        d="M5.00488 11.525V7.075H0.854883V5.125H5.00488V0.65H7.00488V5.125H11.1549V7.075H7.00488V11.525H5.00488Z"
+                        fill="#FDFDFE"></path>
                 </svg>
             </button>
         </div>
-        
+
 
 
         </form>

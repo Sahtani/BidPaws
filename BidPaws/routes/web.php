@@ -41,12 +41,16 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 
-Route::middleware(['auth,user'])->group(function () {
+Route::middleware(['auth','user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::get('/annonces', [AnnonceController::class, 'index']);
         Route::get('/annonces/create', [AnnonceController::class, 'create']);
         Route::post('/annonces', [AnnonceController::class, 'store'])->name('store');
+        Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
+        Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('annonces.update');
+
+
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');
 
         Route::put('/annonces/{annonce}', [AnnonceController::class, 'confirm']);
@@ -56,8 +60,8 @@ Route::middleware(['auth,user'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-        Route::get('/admindashboard',[AdminController::class,'users'])->name('users');
-        Route::patch('/toggleAccess/{user}',[AdminController::class,'toggleAccess'])->name('toggleAccess');
+        Route::get('/admindashboard', [AdminController::class, 'users'])->name('users');
+        Route::patch('/toggleAccess/{user}', [AdminController::class, 'toggleAccess'])->name('toggleAccess');
         Route::post('/storecat', [CategoryController::class, 'store'])->name('storecat');
         Route::delete('/destroycat/{id}', [CategoryController::class, 'destroy'])->name('destroycat');
         Route::put('/update', [CategoryController::class, 'update'])->name('update');

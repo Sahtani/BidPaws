@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AnnonceRequest;
 use App\Models\Annonce;
 use App\Models\AnnonceImage;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -76,7 +77,7 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonce = Annonce::findOrFail($id);
+        $annonce = Annonce::with('category','images')->findOrFail($id);
         
         // Incrémenter les vues chaque fois que l'annonce est vue
         $annonce->increment('views');
@@ -93,12 +94,10 @@ class AnnonceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-        // Récupérer l'annonce à éditer avec sa catégorie et ses images
+    {   $categories=Category::all();
         $annonce = Annonce::with('category', 'images')->findOrFail($id);
     
-        // Afficher le formulaire d'édition avec les données de l'annonce
-        return view('annonces.edit', compact('annonce'));
+        return view('user.update', compact('annonce','categories'));
     }
     
 
