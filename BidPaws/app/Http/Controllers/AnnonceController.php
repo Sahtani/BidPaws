@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\returnSelf;
+use GuzzleHttp\Client;
 
 class AnnonceController extends Controller
 {

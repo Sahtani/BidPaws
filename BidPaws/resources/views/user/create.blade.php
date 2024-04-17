@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
+
     <div class="bg-gray-100 px-6 sm:py-20 py-10 font-[sans-serif]">
         <div class="max-w-screen-xl mx-auto text-950">
             <h1 class="text-2xl max-sm:text-3xl font-extrabold leading-tight mb-4">Publier une annonce
@@ -137,4 +138,28 @@
     </div>
     </div>
     </div>
+    <script>
+        // Récupérer l'élément <select>
+const selectVilles = document.getElementById('selectVilles');
+
+// URL de l'API pour récupérer la liste des villes
+const apiUrl = 'https://calm-fjord-14795.herokuapp.com/api/villes';
+
+// Effectuer une requête GET vers l'API
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    // Parcourir les données pour ajouter chaque ville comme une option dans le <select>
+    data.forEach(ville => {
+      const option = document.createElement('option');
+      option.value = ville.id; // Vous pouvez utiliser l'ID de la ville comme valeur de l'option
+      option.textContent = ville.nom; // Utiliser le nom de la ville comme texte de l'option
+      selectVilles.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error('Erreur lors de la récupération des villes:', error);
+  });
+
+    </script>
 @endsection
