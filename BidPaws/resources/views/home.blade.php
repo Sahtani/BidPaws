@@ -110,11 +110,11 @@
                                         @endforeach
                                     </div>
                                     <!-- Bouton Précédent -->
-                                    <button class="swiper-button-prev absolute top-1/2 left-0 transform -translate-y-1/2 text-gray-700 w-20 h-10 flex items-center justify-center rounded-full cursor-pointer">
+                                    <button class=" text-950  swiper-button-prev absolute top-1/ left-0 transform -translate-y-1/2 text-gray-700 w-20 h-6 flex items-center justify-center rounded-full cursor-pointer">
                                       
                                     </button>
                                     <!-- Bouton Suivant -->
-                                    <button class="swiper-button-next absolute top-1/2 right-0 transform -translate-y-1/2 text-gray-700 w-20 h-10 flex items-center justify-center rounded-full cursor-pointer">
+                                    <button class="text-950  swiper-button-next absolute top-1/2 right-0 transform -translate-y-1/2 text-gray-700 w-20 h-10 flex items-center justify-center rounded-full cursor-pointer">
                                        
                                     </button>
                                     <!-- Pagination -->

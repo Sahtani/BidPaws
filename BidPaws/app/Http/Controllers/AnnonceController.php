@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File;
+
 use App\Http\Requests\AnnonceRequest;
 use App\Models\Annonce;
 use App\Models\AnnonceImage;
@@ -39,24 +41,28 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        // Charger les villes depuis le fichier JSON
+        $villesJsonPath = storage_path('villes_maroc.json');
+        if (File::exists($villesJsonPath)) {
+            $villes = json_decode(File::get($villesJsonPath));
+        } else {
+            $villes = []; // Ou toute autre valeur par défaut
+        }
+        $categories = Category::all();
+        return view('user.create', compact('villes','categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(AnnonceRequest $request)
     {
-        // Validate the request data
         $validatedData = $request->validated();
-
-        // Get the authenticated user
         $user = User::find(Auth::user()->id);
-        $user->role='user';
-        // Create a new annonce with the validated data
+        $user->role = 'user';
         $annonce = $user->annonces()->create($validatedData);
 
-        // Check if images are provided in the request
         if ($request->hasFile('images')) {
             // Process and store each image
             foreach ($request->file('images') as $image) {
@@ -66,8 +72,8 @@ class AnnonceController extends Controller
                 $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }
-        // Redirect with success message
-        return redirect()->route('user.my-listings')->with('success', 'Annonce créée avec succès.');
+        // Redirect with success message and pass the cities data to the view
+        return redirect()->route('user.my-listings')->with(['success' => 'Annonce créée avec succès.']);
     }
 
 
@@ -77,11 +83,11 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonce = Annonce::with('category','images')->findOrFail($id);
-        
+        $annonce = Annonce::with('category', 'images')->findOrFail($id);
+
         // Incrémenter les vues chaque fois que l'annonce est vue
         $annonce->increment('views');
-    
+
         return view('annonce.show', compact('annonce'));
     }
     public function myListings()
@@ -94,20 +100,21 @@ class AnnonceController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {   $categories=Category::all();
+    {
+        $categories = Category::all();
         $annonce = Annonce::with('category', 'images')->findOrFail($id);
-    
-        return view('user.update', compact('annonce','categories'));
+
+        return view('user.update', compact('annonce', 'categories'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-       
-        $validatedData= $request->validated();
+
+        $validatedData = $request->validated();
         // Mettre à jour l'annonce
         $annonce = Annonce::findOrFail($id);
         $annonce->title = $validatedData['title'];
@@ -123,10 +130,10 @@ class AnnonceController extends Controller
             $annonce->views = $validatedData['views'];
         }
         $annonce->save();
-    
+
         return response()->json(['message' => 'Annonce mise à jour avec succès', 'data' => $annonce]);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -136,7 +143,7 @@ class AnnonceController extends Controller
         // avec images 
         $annonce = Annonce::findOrFail($id);
         $annonce->delete();
-    
+
         return redirect()->route('annonces.index')->with('success', 'Announcement deleted successfully.');
     }
 }

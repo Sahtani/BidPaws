@@ -7,28 +7,12 @@ use GuzzleHttp\Client;
 
 class VilleController extends Controller
 {
-    public function getRegions()
-    {
-        $client = new Client();
-        $response = $client->request('GET', 'https://calm-fjord-14795.herokuapp.com/api/regions', [
-            'verify' => false
-        ]);
-        
-        dd($response);
-        return $response->getBody();
-    }
-
+    
     public function getVilles()
     {
-        $client = new Client();
-        $response = $client->request('GET', 'https://calm-fjord-14795.herokuapp.com/api/villes');
-        return $response->getBody();
-    }
+        $villes = json_decode(file_get_contents(storage_path('villes_maroc.json')));
+        dd($villes);
+        return view('user.create', ['villes' => $villes]);
 
-    public function getVillesByRegion($regionID)
-    {
-        $client = new Client();
-        $response = $client->request('GET', 'https://calm-fjord-14795.herokuapp.com/api/villes/'.$regionID);
-        return $response->getBody();
     }
 }

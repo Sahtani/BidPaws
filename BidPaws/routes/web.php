@@ -44,7 +44,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
-        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::get('/create', [AnnonceController::class, 'create'])->name('create');
         Route::get('/annonces', [AnnonceController::class, 'index']);
         Route::get('/annonces/create', [AnnonceController::class, 'create']);
         Route::post('/annonces', [AnnonceController::class, 'store'])->name('store');
@@ -84,6 +84,4 @@ Route::middleware(['auth', 'user'])->group(function () {
 });
 
 
-Route::get('/regions', [VilleController::class, 'getRegions']);
 Route::get('/villes', [VilleController::class, 'getVilles']);
-Route::get('/villes/{regionID}', [VilleController::class, 'getVillesByRegion']);
