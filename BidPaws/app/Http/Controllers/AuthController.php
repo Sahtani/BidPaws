@@ -28,15 +28,16 @@ class AuthController extends Controller
             'username' => $fields['username'],
             'image' => $image[2],
             'email' => $fields['email'],
+            'phone_number' => $fields['phone_number'],
             'password' => Hash::make($request->password),
         ]);
-        return redirect('/')->with('success', 'Registration successful!');
+        return redirect()->route('profile.edit')->with('success', 'Registration successful!');
     }
     public function login(Request $request)
     {
         $fields = $request->validate([
             'email' => 'required|email|',
-            'password' => 'required|string'
+            'password' => 'required|string|min:8'
         ]);
         $user = User::where('email', $fields['email'])->first();
         if (!$user || !Hash::check($fields['password'], $user->password)) {
@@ -48,6 +49,6 @@ class AuthController extends Controller
             // redirect()->route('admin.stats')->with('success', 'Welcome back!');
         }
 
-        return redirect()->route('user.create')->with('sucsess', 'welckom back ');
+        return redirect()->route('profile.edit')->with('sucsess', 'welckom back ');
     }
 }
