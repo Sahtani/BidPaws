@@ -49,7 +49,7 @@ class AnnonceController extends Controller
             $villes = []; // Ou toute autre valeur par défaut
         }
         $categories = Category::all();
-        return view('user.create', compact('villes','categories'));
+        return view('user.create', compact('villes', 'categories'));
     }
 
     /**
@@ -145,5 +145,22 @@ class AnnonceController extends Controller
         $annonce->delete();
 
         return redirect()->route('annonces.index')->with('success', 'Announcement deleted successfully.');
+    }
+    public function searchByVille(Request $request)
+    {
+        $ville = $request->input('ville');
+
+        $annonces = Annonce::where('location', 'like', '%' . $ville . '%')->get();
+
+        return view('home', ['annonces' => $annonces]);
+    }
+
+    public function filterByCategory($category_id)
+    {
+        
+        $annonces = Annonce::where('category_id', $category_id)->get();
+
+        
+        return view('home', ['annonces' => $annonces]);
     }
 }

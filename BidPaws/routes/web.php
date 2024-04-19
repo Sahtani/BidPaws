@@ -72,6 +72,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
+Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
+
+Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('annonces.category');
+
 
 
 // Profile user
