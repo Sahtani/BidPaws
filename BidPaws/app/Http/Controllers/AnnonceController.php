@@ -23,7 +23,7 @@ class AnnonceController extends Controller
     public function index()
     {
 
-        $annonces = Annonce::with('images')->paginate(10); // 10 annonces par page, vous pouvez ajuster cela selon vos besoins
+        $annonces = Annonce::with('images')->paginate(6); 
 
         return view('allannonces', compact('annonces'));
     }

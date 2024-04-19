@@ -27,9 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::get('/allannonces', [AnnonceController::class, 'index'])->name('allannoces');
+
+
 Route::get('/', [AnnonceController::class, 'recentAnnouncements'])->name('home');
 Route::get('/contact-us', function () {
     return view('contact-us');
@@ -75,6 +75,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
 
 Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('annonces.category');
+
 
 
 

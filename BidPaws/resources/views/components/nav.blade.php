@@ -1,7 +1,7 @@
 <div>
 
     <nav class=" bg-white border-gray-200 text-950  rounded shadow-md">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 shadow-b-2xl">
+        <div class=" max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 shadow-b-2xl">
             <div>
                 <a href="#">
                     <img src="{{ asset('image/DogCats.jpg') }}" class="h-200 w-1/3" alt="Flowbite Logo" /> </a>
