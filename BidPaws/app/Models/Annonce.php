@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Favorite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +20,7 @@ class Annonce extends Model
         'price',
         'location',
         'age',
-        'status', 
+        'status',
         'role'
     ];
 
@@ -37,5 +38,10 @@ class Annonce extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }
