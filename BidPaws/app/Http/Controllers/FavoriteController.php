@@ -7,6 +7,16 @@ use App\Models\Favorite;
 
 class FavoriteController extends Controller
 {
+
+
+    public function displayFavorites()
+    {
+        $user = auth()->user();
+
+        $favorites = $user->favorites;
+
+        return view('favorites.index', ['favorites' => $favorites]);
+    }
     public function addToFavorites(Request $request, $annonce_id)
     {
         $user = $request->user();
