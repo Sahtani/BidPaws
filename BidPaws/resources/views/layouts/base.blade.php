@@ -228,10 +228,8 @@
             },
         });
     </script>
-    @user
+   
         <x-footer />
-    @enduser
-
     <script src="{{ asset('js/carousel.js') }}"></script>
     <script>
         (function() {

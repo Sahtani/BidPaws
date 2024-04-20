@@ -34,6 +34,9 @@ Route::get('/', [AnnonceController::class, 'recentAnnouncements'])->name('home')
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about-us');
 
 Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
 Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');

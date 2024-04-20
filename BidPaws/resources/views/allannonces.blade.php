@@ -74,11 +74,22 @@
                     @foreach ($annonces as $annonce)
                         <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
                             <div class="p-2">
-                                <div class="swiper-slide">
-                                    @@dump({{ $annonce->category->name }})
-                                    <div class="mb-2 text-center">{{ $annonce->category->name }}</div> <!-- Display category name -->
-                                    <img src="{{ asset('storage/annonceImages/' . $annonce->images->first()->image_path) }}" alt="Image" class="rounded">
-                                </div>
+                                @foreach ($annonce->images as $key => $image)
+                                @if ($key == 0)
+                                    <div class="swiper-slide relative">
+                                        <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}" alt="Image" class="rounded">
+                                        <div class="flex items-center justify-center">
+                                            <div class="absolute top-30 left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
+                                                
+                                                {{ $annonce->category->name }}
+                                            </div>
+                                        </div>
+                                         
+                                    </div>
+                                    @break
+                                @endif
+                            @endforeach
+                            
                                 
                             <div class="flex flex-col mt-2 ml-8">
                                 <h3 class="font-semibold text-950">{{ ucfirst($annonce->title) }}
