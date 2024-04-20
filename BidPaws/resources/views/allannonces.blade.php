@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col items-center justify-center w-full">
         <div class="flex items-center justify-center bg-white  border border-white mt-10 w-9/12  rounded-lg ">
-            <div class="grid grid-cols-4 gap-6 px-6 py-6 w-full">
+            <div class="grid grid-cols-4 gap-6 px-6 py-6 w-full shadow-xl">
                 <div class="card">
                     <div class="flex flex-col">
                         <h3 class="font-semibold text-indigo-900">Species</h3>
@@ -55,8 +55,8 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-4 gap-4 shadow-xl border border-white mt-10 w-9/12  rounded-lg ">
-            <div class="px-6 py-6 w-full border border-white rounded-lg bg-white ">
+        <div class="grid grid-cols-4 gap-4 border border-none  mt-10 w-9/12  rounded-lg ">
+            <div class="px-6 py-6 w-full border border-white rounded-lg bg-white shadow-xl ">
                 <div class="flex flex-col">
                     <h3 class="font-semibold text-indigo-900">Sex</h3>
 
@@ -72,22 +72,41 @@
             <div class="col-start-2 col-end-5 ">
                 <div class="grid grid-cols-3 gap-4  ">
                     @foreach ($annonces as $annonce)
-                        <div class="px-2 w-full border border-white rounded-lg bg-white mr-2">
+                        <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
                             <div class="p-2">
-                                @foreach ($annonce->images as $key => $image)
-                                    @if ($key == 0)
-                                        <div class="swiper-slide">
-                                            <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}"
-                                                alt="Image" class="rounded">
-                                        </div>
-                                    @break
-                                @endif
-                            @endforeach
-                            <div class="flex flex-col mt-2 ml-8"> 
-                                <h3 class="font-semibold text-950"> {{ $annonce->title }}</h3>
+                                <div class="swiper-slide">
+                                    @@dump({{ $annonce->category->name }})
+                                    <div class="mb-2 text-center">{{ $annonce->category->name }}</div> <!-- Display category name -->
+                                    <img src="{{ asset('storage/annonceImages/' . $annonce->images->first()->image_path) }}" alt="Image" class="rounded">
+                                </div>
+                                
+                            <div class="flex flex-col mt-2 ml-8">
+                                <h3 class="font-semibold text-950">{{ ucfirst($annonce->title) }}
+                                </h3>
                                 <h6></h6>
                                 <div class="flex flex-col gap-2">
-                                    <span class="  bg-blue-100 px-2 w-1/6 text-950"> {{ $annonce->location }}</span>
+                                    <div class="flex items-center gap-1">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                            stroke="#1fffe5">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z"
+                                                    stroke="#1fffe5" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path
+                                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
+                                                    stroke="#1fffe5" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                        <span class=" w-1/6 text-950"> {{ $annonce->location }}</span>
+
+                                    </div>
+
+
                                     <div class="flex items-center" bis_skin_checked="1">
                                         <div class="flex-shrink-0 mr-1" bis_skin_checked="1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
@@ -101,16 +120,9 @@
                                         <div class="text-gray-700 font-semibold" bis_skin_checked="1">
                                             {{ \Carbon\Carbon::parse($annonce->created_at)->diffForHumans() }}</div>
                                     </div>
-
-
                                 </div>
-                                date
-
                             </div>
-
-
                         </div>
-
                     </div>
                 @endforeach
             </div>
