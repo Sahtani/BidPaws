@@ -1,0 +1,5 @@
+{
+    "require": {
+        "ichtrojan/laravel-location": "^3.3"
+    }
+}
