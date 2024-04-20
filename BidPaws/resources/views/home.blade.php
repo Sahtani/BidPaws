@@ -1,6 +1,4 @@
 @extends('layouts.base')
-
-
 @section('content')
     <div class="">
         <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
