@@ -118,17 +118,17 @@
                                     </div>
 
 
-                                    <div class="flex items-center" bis_skin_checked="1">
-                                        <div class="flex-shrink-0 mr-1" bis_skin_checked="1">
+                                    <div class="flex items-center" >
+                                        <div class="flex-shrink-0 mr-1" >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                 viewBox="0 0 12 12" fill="none"
-                                                class="w-3 h-3 fill-current text-gray-700" bis_skin_checked="1">
+                                                class="w-3 h-3 fill-current text-gray-700" >
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                     d="M6 0C2.6934 0 0 2.6934 0 6C0 9.3066 2.6934 12 6 12C9.3066 12 12 9.3066 12 6C12 2.6934 9.3066 0 6 0ZM6 1.2C8.65807 1.2 10.8 3.34193 10.8 6C10.8 8.65807 8.65807 10.8 6 10.8C3.34193 10.8 1.2 8.65807 1.2 6C1.2 3.34193 3.34193 1.2 6 1.2ZM5.4 2.4V6.24844L7.97578 8.82422L8.82422 7.97578L6.6 5.75156V2.4H5.4Z"
                                                     fill="#374B5C"></path>
                                             </svg>
                                         </div>
-                                        <div class="text-gray-700 font-semibold" bis_skin_checked="1">
+                                        <div class="text-gray-700 font-semibold" >
                                             {{ \Carbon\Carbon::parse($annonce->created_at)->diffForHumans() }}</div>
                                     </div>
                                 </div>
@@ -195,5 +195,6 @@
             class="inline-flex justify-center w-1/3 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">More
             Filters</button>
     </div>
+    {{ $annonces->links() }}
 </div>
 @endsection
