@@ -1,5 +1,8 @@
 @extends('layouts.base')
 @section('content')
+<div class="flex items-center justify-center mt-10 ">
+
+<div class="bg-white max-w-6xl ">
     <div class="flex items-center mt-10 ml-10 bg-gray-200 w-fit px-2 py-1">
         <a href="{{ route('home') }}" title="home" class="text-950  font-semibold mr-2">
             Home
@@ -15,6 +18,7 @@
             Abouts us
         </span>
     </div>
+
 
     <section class=" relative z-0">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center">
@@ -98,7 +102,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
     <section class="py-14 lg:py-24 relative">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative ">
@@ -178,28 +181,6 @@
             </div>
         </div>
     </section>
-    <div class="flex flex-col items-center justify-center">
-        <p class="mb-4">Create your rescue profile now</p>
-        <div class="mb-4">
-            <input placeholder="Charity or Shelter Name" class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" value="">
-        </div>
-        <div class="mb-4">
-            <input placeholder="Contact Name" class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" value="">
-        </div>
-        <div class="mb-4">
-            <input placeholder="Contact Email" class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500" value="">
-        </div>
-        <button class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" disabled>Create my page</button>
-        <div class="mt-8">
-            <h2>Contact Us</h2>
-            <p>If you're an animal rescue and are wondering how PAW Rescue Manager can help you, get in touch with us via email, or contact Tristan on +44 7969814864</p>
-            <a href="mailto:tristan@petadoptionwebsite.com">
-                <div class="mt-4 mb-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded cursor-pointer focus:outline-none focus:shadow-outline">Email Us</div>
-            </a>
-            <a href="https://wa.me/447969814864" target="_blank" rel="noreferrer">
-                <div class="mt-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded cursor-pointer focus:outline-none focus:shadow-outline">WhatsApp</div>
-            </a>
-        </div>
-    </div>
-    
+</div> 
+</div>
 @endsection

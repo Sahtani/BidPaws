@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="{{ asset('image/DogCats.jpg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('image/c.webp') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -200,7 +200,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 
-<body class="bg-gray-100 font-[sans-serif]">
+<body class="bg-gray-200 font-[sans-serif]">
     {{-- @user --}}
     <x-nav />
     {{-- @enduser --}}
