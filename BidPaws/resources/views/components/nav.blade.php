@@ -1,5 +1,4 @@
 <div>
-
     <nav class=" bg-white border-gray-200 text-950  rounded shadow-md">
         <div class=" max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 shadow-b-2xl">
             <div>

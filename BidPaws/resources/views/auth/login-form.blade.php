@@ -10,14 +10,14 @@
 
 
             <div class="form h-fit  bg-white border md:w-3/5 ">
-                <ul class="tab-group">
-                    <li class="tab active "><a href="{{ route('sign-up') }}" id="signup-link" >Sign Up</a></li>
-                    <li class="tab"><a href="{{ route('log-in') }}" id="login-link">Log In</a></li>
+                <ul class="tab-group rounded-full">
+                    <li class="tab active bg-gray-200 "><a href="{{ route('sign-up') }}" id="signup-link" >Sign Up</a></li>
+                    <li class=" bg-950"><a href="{{ route('log-in') }}" id="login-link">Log In</a></li>
                 </ul>
 
                 <div class="tab-content">
                     <div id="login-form">
-                        <h1>Welcome Back!</h1>
+                        <h1 class="text-950 font-semibold mb-2">Welcome Back!</h1>
 
                         <form action="{{ route('login') }}" method="post">
                             @csrf
@@ -44,17 +44,24 @@
                                     id="password" placeholder="Password">
                                    
                             </div>
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                            <p class="forgot"><a href="#">Forgot Password?</a></p>
-                            <div>
-                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label for="remember">Remember me</label>
+                           
+                            <div class="flex items-center justify-between  gap-12 my-4">
+                                <div>
+                                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="text-950 font-semibold" for="remember">Remember me</label>
+                                </div>
+                              <div>
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    <p class="text-950 font-semibold" ><a href="#">Forgot Password?</a></p>
+                              </div>
+                             
                             </div>
-                            
-                            <button type="submit"
-                                class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2">Log
-                                In</button>
-                            <div class=" grid space-y-4">
+                                <button
+                                class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2 group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
+   hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">Log
+   In
+                                </button>
+                            <div class=" grid space-y-4 mt-4">
                                 <button
                                     class="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
                                     hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
@@ -66,9 +73,7 @@
                                             with Google</span>
                                     </div>
                                 </button>
-                                <button
-                                    class="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
-       hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
+                            
        </div>
 
     <script>

@@ -31,6 +31,7 @@ class AuthController extends Controller
             'phone_number' => $fields['phone_number'],
             'password' => Hash::make($request->password),
         ]);
+        Auth::login($user);
         return redirect()->route('profile.edit')->with('success', 'Registration successful!');
     }
     public function login(Request $request)

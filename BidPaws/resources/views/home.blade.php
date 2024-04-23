@@ -1,16 +1,17 @@
 @extends('layouts.base')
 @section('content')
+
     <div class="">
         <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
             <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
                 <div class="flex flex-col">
-                    <h1 class="font-bold pt-20 pl-4 md:pl-8 text-6xl text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
+                    <h1 class=" title font-bold pt-20 pl-4 md:pl-8 text-6xl text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
                         YOUR BEST<br class="text-white"> FRIEND DESERVES<br> THE BEST
                     </h1>
                     
                 </h1>
                 <a href="#contact" class="w-fit pl-10 pt-4">
-                    <div class="bg-yell text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 ease-in-out">
+                    <div id="button" class="bg-yell text-white px-4 py-2 rounded hover:scale-20 transition duration-300 ease-in-out">
                         Create your free account now
                     </div>
                 </a>
@@ -191,5 +192,42 @@
         </div>
     </div>
       </div>
-   
+      <script>
+        // Attend que le document soit prêt
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sélectionne l'élément que vous voulez animer
+            const title = document.querySelector('.title');
+    
+            // Anime l'élément avec une animation qui le fait venir d'en haut
+            anime({
+                targets: title,
+                translateY: ['-200px', '0px'],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeInOutQuad' // Optionnel : changement d'animation
+            });
+        });
+    </script>
+    <script>
+        // Attend que le document soit prêt
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sélectionne le bouton
+            const button = document.getElementById('button');
+    
+            // Ajoute un gestionnaire d'événements au survol du bouton
+            button.addEventListener('mouseenter', function() {
+                // Ajoute la classe 'rotate' lorsque survolé
+                button.classList.add('rotate');
+            });
+    
+            // Ajoute un gestionnaire d'événements lorsque la souris quitte le bouton
+            button.addEventListener('mouseleave', function() {
+                // Supprime la classe 'rotate' lorsque la souris quitte
+                button.classList.remove('rotate');
+            });
+        });
+    </script>
+    
+    
+    
 @endsection

@@ -11,7 +11,7 @@
             <div class="form h-fit  bg-white border md:w-3/5 ">
 
                 <ul class="tab-group">
-                    <li class="tab active "><a href="{{ route('sign-up') }}" id="signup-link">Sign Up</a></li>
+                    <li class="tab active bg-yell "><a href="{{ route('sign-up') }}" id="signup-link">Sign Up</a></li>
                     <li class="tab"><a href="{{ route('log-in') }}" id="login-link">Log In</a></li>
                 </ul>
 
