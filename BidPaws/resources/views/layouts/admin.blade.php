@@ -209,9 +209,7 @@
 </head>
 
 <body class="bg-gray-200 font-[sans-serif]">
-    {{-- @user --}}
-    <x-nav />
-    {{-- @enduser --}}
+
 
     @admin
         <x-nav-aside />
@@ -237,7 +235,6 @@
         });
     </script>
    
-        <x-footer />
     <script src="{{ asset('js/carousel.js') }}"></script>
     <script>
         (function() {

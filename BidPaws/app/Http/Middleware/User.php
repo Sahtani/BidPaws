@@ -18,7 +18,7 @@ class User
         if ($request->user() && $request->user()->role === 'user') {
             return $next($request);
         }elseif($request->user()->role === 'admin'){
-            return redirect()->route('admin.stats');
+            return redirect()->route('admin.categories');
         }
 
     }

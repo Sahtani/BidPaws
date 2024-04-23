@@ -46,7 +46,8 @@ class AuthController extends Controller
         }
         Auth::login($user);
         if ($user->isAdmin()) {
-            return  view('admin.stats');
+                redirect()->route('admin.categories')->with('success', 'Welcome back!');
+            // return  view('admin.stats');
             // redirect()->route('admin.stats')->with('success', 'Welcome back!');
         }
 
@@ -57,6 +58,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('login')->with('success', 'You have been logged out.');
+        return redirect()->route('home')->with('success', 'You have been logged out.');
     }
 }

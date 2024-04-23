@@ -1,21 +1,37 @@
 @extends('layouts.base')
 @section('content')
-
     <div class="">
         <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
+            @if (session('success'))
+                <div id="logoutPopup" class="w-1/3 pt-4" style="display: block;">
+                    <div class="flex items-center p-4 w-1/2 p-4 ml-12  text-xl text-white rounded-lg bg-blue-500 dark:bg-gray-800 dark:text-blue-400"
+                        role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <div>
+                            <span class="font-medium">{{ session('success') }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
                 <div class="flex flex-col">
-                    <h1 class=" title font-bold pt-20 pl-4 md:pl-8 text-6xl text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
+                    <h1
+                        class=" title font-bold pt-20 pl-4 md:pl-8 text-6xl text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
                         YOUR BEST<br class="text-white"> FRIEND DESERVES<br> THE BEST
                     </h1>
-                    
-                </h1>
-                <a href="#contact" class="w-fit pl-10 pt-4">
-                    <div id="button" class="bg-yell text-white px-4 py-2 rounded hover:scale-20 transition duration-300 ease-in-out">
-                        Create your free account now
-                    </div>
-                </a>
-                </div>  
+
+                    </h1>
+                    <a href="#contact" class="w-fit pl-10 pt-4">
+                        <div id="button"
+                            class="bg-yell text-white px-4 py-2 rounded hover:scale-20 transition duration-300 ease-in-out">
+                            Create your free account now
+                        </div>
+                    </a>
+                </div>
                 <div class="w-full max-w-xs mt-20 mx-auto">
                     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div class="mb-4">
@@ -109,30 +125,32 @@
                             <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
                                 <div class="p-2">
                                     @foreach ($annonce->images as $key => $image)
-                                    @if ($key == 0)
-                                        <div class="swiper-slide relative">
-                                            <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}" alt="Image" class="rounded">
-                                            <div class="flex items-center justify-center">
-                                                <div class="absolute top-30 left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
-                                                    
-                                                    {{ $annonce->category->name }}
+                                        @if ($key == 0)
+                                            <div class="swiper-slide relative">
+                                                <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}"
+                                                    alt="Image" class="rounded">
+                                                <div class="flex items-center justify-center">
+                                                    <div
+                                                        class="absolute top-30 left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
+
+                                                        {{ $annonce->category->name }}
+                                                    </div>
                                                 </div>
+
                                             </div>
-                                             
-                                        </div>
                                         @break
                                     @endif
                                 @endforeach
-                                
-                                    
+
+
                                 <div class="flex flex-col mt-2 ml-8">
                                     <h3 class="font-semibold text-950">{{ ucfirst($annonce->title) }}
                                     </h3>
                                     <h6></h6>
                                     <div class="flex flex-col gap-2">
                                         <div class="flex items-center gap-1">
-                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                stroke="#1fffe5">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5" stroke="#1fffe5">
                                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
                                                     stroke-linejoin="round"></g>
@@ -148,86 +166,83 @@
                                                 </g>
                                             </svg>
                                             <span class=" w-1/6 text-950"> {{ $annonce->location }}</span>
-    
+
                                         </div>
-    
-    
-                                        <div class="flex items-center" >
-                                            <div class="flex-shrink-0 mr-1" >
+
+
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                     viewBox="0 0 12 12" fill="none"
-                                                    class="w-3 h-3 fill-current text-gray-700" >
+                                                    class="w-3 h-3 fill-current text-gray-700">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                                         d="M6 0C2.6934 0 0 2.6934 0 6C0 9.3066 2.6934 12 6 12C9.3066 12 12 9.3066 12 6C12 2.6934 9.3066 0 6 0ZM6 1.2C8.65807 1.2 10.8 3.34193 10.8 6C10.8 8.65807 8.65807 10.8 6 10.8C3.34193 10.8 1.2 8.65807 1.2 6C1.2 3.34193 3.34193 1.2 6 1.2ZM5.4 2.4V6.24844L7.97578 8.82422L8.82422 7.97578L6.6 5.75156V2.4H5.4Z"
                                                         fill="#374B5C"></path>
                                                 </svg>
                                             </div>
-                                            <div class="text-gray-700 font-semibold" >
+                                            <div class="text-gray-700 font-semibold">
                                                 {{ \Carbon\Carbon::parse($annonce->created_at)->diffForHumans() }}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                class="flex items-center justify-between mt-4 gap-20 items-center border-t border-slate-200 text-950 p-0 ">
-                                <div
-                                    class="my-4 bg-slate-100 py-1 px-1 f rounded-2xl text-sm text-gray-700 flex items-center">
+                                    class="flex items-center justify-between mt-4 gap-20 items-center border-t border-slate-200 text-950 p-0 ">
+                                    <div
+                                        class="my-4 bg-slate-100 py-1 px-1 f rounded-2xl text-sm text-gray-700 flex items-center">
 
-                                    <svg class="w-4 h-4  fill-current text-gray-700 m-1"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M0 5.12585C0 2.63358 1.97698 0.600098 4.4 0.600098C5.79057 0.600098 7.00127 1.36803 8 2.67253C8.99873 1.36803 10.2094 0.600098 11.6 0.600098C14.023 0.600098 16 2.63358 16 5.12585C16 6.81114 14.7649 8.39793 13.2594 10.0253C12.3953 10.9592 11.4168 11.9 10.4607 12.8192C9.75083 13.5017 9.05333 14.1723 8.42422 14.8194C8.1899 15.0603 7.8101 15.0603 7.57578 14.8194C6.94667 14.1723 6.24917 13.5017 5.5393 12.8192C4.5832 11.9 3.60467 10.9592 2.74062 10.0253C1.23506 8.39793 0 6.81114 0 5.12585ZM7.49292 4.01531C6.54647 2.47557 5.57138 1.8344 4.39995 1.8344C2.62537 1.8344 1.19995 3.30056 1.19995 5.12585C1.19995 6.11487 2.16489 7.61383 3.60933 9.17508C4.43297 10.0653 5.38179 10.9805 6.32832 11.8935C6.89549 12.4405 7.46184 12.9868 7.99995 13.5265C8.53806 12.9868 9.10441 12.4405 9.67159 11.8935C10.6181 10.9805 11.5669 10.0653 12.3906 9.17508C13.835 7.61383 14.8 6.11487 14.8 5.12585C14.8 3.30056 13.3745 1.8344 11.6 1.8344C10.4285 1.8344 9.45343 2.47557 8.50698 4.01531C8.39698 4.19407 8.20563 4.30243 7.99995 4.30243C7.79427 4.30243 7.60292 4.19407 7.49292 4.01531Z"
-                                            fill="#283948"></path>
-                                    </svg>
+                                        <svg class="w-4 h-4  fill-current text-gray-700 m-1"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M0 5.12585C0 2.63358 1.97698 0.600098 4.4 0.600098C5.79057 0.600098 7.00127 1.36803 8 2.67253C8.99873 1.36803 10.2094 0.600098 11.6 0.600098C14.023 0.600098 16 2.63358 16 5.12585C16 6.81114 14.7649 8.39793 13.2594 10.0253C12.3953 10.9592 11.4168 11.9 10.4607 12.8192C9.75083 13.5017 9.05333 14.1723 8.42422 14.8194C8.1899 15.0603 7.8101 15.0603 7.57578 14.8194C6.94667 14.1723 6.24917 13.5017 5.5393 12.8192C4.5832 11.9 3.60467 10.9592 2.74062 10.0253C1.23506 8.39793 0 6.81114 0 5.12585ZM7.49292 4.01531C6.54647 2.47557 5.57138 1.8344 4.39995 1.8344C2.62537 1.8344 1.19995 3.30056 1.19995 5.12585C1.19995 6.11487 2.16489 7.61383 3.60933 9.17508C4.43297 10.0653 5.38179 10.9805 6.32832 11.8935C6.89549 12.4405 7.46184 12.9868 7.99995 13.5265C8.53806 12.9868 9.10441 12.4405 9.67159 11.8935C10.6181 10.9805 11.5669 10.0653 12.3906 9.17508C13.835 7.61383 14.8 6.11487 14.8 5.12585C14.8 3.30056 13.3745 1.8344 11.6 1.8344C10.4285 1.8344 9.45343 2.47557 8.50698 4.01531C8.39698 4.19407 8.20563 4.30243 7.99995 4.30243C7.79427 4.30243 7.60292 4.19407 7.49292 4.01531Z"
+                                                fill="#283948"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="text-gray-700 mr-4">4 Vues</div>
                                 </div>
-                                <div class="text-gray-700 mr-4" >4 Vues</div>
-                            </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-    
 
-                </div>
+
             </div>
         </div>
     </div>
-      </div>
-      <script>
-        // Attend que le document soit prêt
-        document.addEventListener("DOMContentLoaded", function() {
-            // Sélectionne l'élément que vous voulez animer
-            const title = document.querySelector('.title');
-    
-            // Anime l'élément avec une animation qui le fait venir d'en haut
-            anime({
-                targets: title,
-                translateY: ['-200px', '0px'],
-                opacity: [0, 1],
-                duration: 1000,
-                easing: 'easeInOutQuad' // Optionnel : changement d'animation
-            });
+</div>
+</div>
+<script>
+    // Attend que le document soit prêt
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sélectionne l'élément que vous voulez animer
+        const title = document.querySelector('.title');
+
+        // Anime l'élément avec une animation qui le fait venir d'en haut
+        anime({
+            targets: title,
+            translateY: ['-200px', '0px'],
+            opacity: [0, 1],
+            duration: 1000,
+            easing: 'easeInOutQuad' // Optionnel : changement d'animation
         });
-    </script>
-    <script>
-        // Attend que le document soit prêt
-        document.addEventListener("DOMContentLoaded", function() {
-            // Sélectionne le bouton
-            const button = document.getElementById('button');
-    
-            // Ajoute un gestionnaire d'événements au survol du bouton
-            button.addEventListener('mouseenter', function() {
-                // Ajoute la classe 'rotate' lorsque survolé
-                button.classList.add('rotate');
-            });
-    
-            // Ajoute un gestionnaire d'événements lorsque la souris quitte le bouton
-            button.addEventListener('mouseleave', function() { 
-                // Supprime la classe 'rotate' lorsque la souris quitte
-                button.classList.remove('rotate');
-            });
+    });
+</script>
+<script>
+    // Attend que le document soit prêt
+    document.addEventListener("DOMContentLoaded", function() {
+        // Sélectionne le bouton
+        const button = document.getElementById('button');
+
+        // Ajoute un gestionnaire d'événements au survol du bouton
+        button.addEventListener('mouseenter', function() {
+            // Ajoute la classe 'rotate' lorsque survolé
+            button.classList.add('rotate');
         });
-    </script>
-    
-    
-    
+
+        // Ajoute un gestionnaire d'événements lorsque la souris quitte le bouton
+        button.addEventListener('mouseleave', function() {
+            // Supprime la classe 'rotate' lorsque la souris quitte
+            button.classList.remove('rotate');
+        });
+    });
+</script>
 @endsection

@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Annonce;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-
+    
+    public function getUser()
+    {
+        return Auth::user(); 
+    }
     public function toggleAccess(User $user)
     {
         try {
@@ -26,19 +31,20 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::where('role', 'user')->get();
-        return view('admin.users', compact('users'));
+        $user = $this->getUser();
+        return view('admin.users', compact('users','user'));
     }
 
-    public function annoces()
+    public function annonces()
     {
-        $events = Annonce::all();
-        return view('admin.events', compact('events'));
+        $annonces = Annonce::with('category','images')->get();
+        return view('admin.annonces', compact('annonces'));
     }
 
-    public function acceptAnnoces(Annonce $annoce)
+    public function acceptAnnoces(Annonce $annonce)
     {
-        $annoce->status = 'accepted';
-        $annoce->save();
+        $annonce->status = 'confirmed';
+        $annonce->save();
         return back()->with('success', 'Annoce accepted successfully.');
     }
 

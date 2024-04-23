@@ -1,9 +1,11 @@
-@extends('layouts.base')
+@extends('layouts.admin')
 
 @section('content')
- 
-    <div class=" mx-20 px-4 py-8 sm:px-8 sm:ml-64">
-
+<div class=" mx-20 px-4 py-8 sm:px-8 sm:ml-64 bg-white w-full h-16">
+{{ $user->name }}
+</div>
+    <div class=" mx-20 mt-20 px-4 py-8 sm:px-8 sm:ml-64">
+       
         <div class="overflow-y-hidden rounded-lg border">
             <div class="overflow-x-auto">
                 <table class="w-full">

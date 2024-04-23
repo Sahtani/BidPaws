@@ -72,7 +72,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::delete('/destroycat/{id}', [CategoryController::class, 'destroy'])->name('destroycat');
         Route::put('/update', [CategoryController::class, 'update'])->name('update');
         // stats
-        // Route::get('/stats',[StatisticsController::class,'index'])->name('stats');
+        Route::get('/annonces',[AdminController::class,'annonces'])->name('annonces');
+        Route::patch('/validateAnnonce/{annonce}',[AdminController::class,'acceptAnnoces'])->name('validateAnnonce');
+        Route::patch('/rejectAnnoces/{annonce}',[AdminController::class,'rejectAnnoces'])->name('rejectAnnoces');
+   
     });
 });
 
