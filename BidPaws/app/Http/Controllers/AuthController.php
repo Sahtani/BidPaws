@@ -52,4 +52,11 @@ class AuthController extends Controller
 
         return redirect()->route('profile.edit')->with('sucsess', 'welckom back ');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login')->with('success', 'You have been logged out.');
+    }
 }

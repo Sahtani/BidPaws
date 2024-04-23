@@ -221,7 +221,7 @@
             });
     
             // Ajoute un gestionnaire d'événements lorsque la souris quitte le bouton
-            button.addEventListener('mouseleave', function() {
+            button.addEventListener('mouseleave', function() { 
                 // Supprime la classe 'rotate' lorsque la souris quitte
                 button.classList.remove('rotate');
             });
