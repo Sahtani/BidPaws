@@ -209,13 +209,8 @@
 </head>
 
 <body class="bg-gray-200 font-[sans-serif]">
-    {{-- @user --}}
+  
     <x-nav />
-    {{-- @enduser --}}
-
-    @admin
-        <x-nav-aside />
-    @endadmin
     <section>
         @yield('content')
     </section>

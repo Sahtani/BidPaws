@@ -120,8 +120,11 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-4 mt-6  ">
+                    <div class="grid grid-cols-3 gap-4 mt-6">
                         @foreach ($annonces as $annonce)
+                        <a href="{{ route('show',$annonce->id) }}">
+
+                       
                             <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
                                 <div class="p-2">
                                     @foreach ($annonce->images as $key => $image)
@@ -201,6 +204,7 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     @endforeach
                 </div>
 

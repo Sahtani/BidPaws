@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
         Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('annonces.update');
         Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('annonces.destroy');
+        
 
 
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');
@@ -62,7 +63,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::put('/annonces/{annonce}', [AnnonceController::class, 'confirm']);
     });
 });
-
+Route::get('annonces/show/{id}', [AnnonceController::class, 'show'])->name('show');
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories');

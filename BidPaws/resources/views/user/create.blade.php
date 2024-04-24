@@ -11,7 +11,7 @@
             <p class="text-lg mb-8">Experience excellence like never before with our exclusive products and services.</p>
 
 
-            <form action="{{ url('user/annonces') }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" class="mx-auto">
                 @csrf
                 <div class="grid grid-cols-3 gap-6">
                     <div class="grid col-start-1  col-end-3">
@@ -34,7 +34,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <select name="category" id="category"
+                                <select name="category_id" id="category"
                                     class=" rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-yell focus:outline-none">
                                     <option disabled selected value="">Select a category</option>
                                     @foreach ($categories as $category)
@@ -42,7 +42,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <x-input-error :messages="$errors->get('category')" class="my-2" />
+                            <x-input-error :messages="$errors->get('category_id')" class="my-2" />
                         </div>
                     </div>
                     <div class="grid col-start-2  col-end-2">
@@ -65,7 +65,7 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <select name="location" value="{{ old('city') }}" id="ville"
+                                <select name="location" value="{{ old('location') }}" id="ville"
                                     class="rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-yellow focus:outline-none">
                                     <option disabled selected value="">Select a city</option>
                                     @foreach ($villes as $ville)
@@ -96,10 +96,11 @@
                 <div class="mb-8 mt-6">
                     <label class="text-xl font-bold mb-4">Description <span class="text-red-500">*</span></label></br>
                     <textarea name="description" class="border-2 border-gray-500">
-                      {{ old('title') }}"
+                      {{ old('description') }}"
                     </textarea>
-                    <x-input-error :messages="$errors->get('description')" class="my-2" />
+                   
                 </div>
+                <x-input-error :messages="$errors->get('description')" class="my-2" />
                 <div class="mt-6">
                     <h3 class="text-xl font-bold mb-4">Upload photos (3 photos max.) <span class="text-red-500">*</span>
                     </h3>

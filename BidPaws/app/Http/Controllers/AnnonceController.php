@@ -40,12 +40,12 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        // Charger les villes depuis le fichier JSON
+        
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
             $villes = json_decode(File::get($villesJsonPath));
         } else {
-            $villes = []; // Ou toute autre valeur par défaut
+            $villes = [];
         }
         $categories = Category::all();
         return view('user.create', compact('villes', 'categories'));
@@ -60,10 +60,11 @@ class AnnonceController extends Controller
         $validatedData = $request->validated();
         $user = User::find(Auth::user()->id);
         $user->role = 'user';
+
+      
         $annonce = $user->annonces()->create($validatedData);
 
-        if ($request->hasFile('images')) {
-            // Process and store each image
+        if ($request->hasFile('images')) {  
             foreach ($request->file('images') as $image) {
                 $image = $image->store('public/annonceImages');
                 $imagePath = explode("/", $image);
@@ -71,8 +72,8 @@ class AnnonceController extends Controller
                 $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }
-        // Redirect with success message and pass the cities data to the view
-        return redirect()->route('user.my-listings')->with(['success' => 'Annonce créée avec succès.']);
+
+         return redirect()->route('user.my-listings')->with(['success' => 'Annonce créée avec succès.']);
     }
 
 
@@ -82,12 +83,11 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-        $annonce = Annonce::with('category', 'images')->findOrFail($id);
+        $annonce = Annonce::with('category', 'images','user')->findOrFail($id);
 
-        // Incrémenter les vues chaque fois que l'annonce est vue
         $annonce->increment('views');
 
-        return view('annonce.show', compact('annonce'));
+        return view('show', compact('annonce'));
     }
     public function myListings()
     {

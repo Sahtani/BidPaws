@@ -23,6 +23,7 @@ class Annonce extends Model
         'location',
         'age',
         'status',
+        'category_id',
         'role'
     ];
 
