@@ -1,8 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class=" mx-20 px-4 py-8 sm:px-8 sm:ml-64 bg-white w-full h-16 flex ">
+    <div class="text-xl text-[#1e1b4b] font-bold">
+        {{ $user->name }}
+    </div>
+
+</div>
     @if (session('success'))
-        <div class="w-full">
+        <div class="w-full ml-64">
             <div class="flex items-center p-4  w-1/2 p-4 ml-12 mt-4 text-xl text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                 role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -17,8 +23,7 @@
         </div>
     @endif
     <div class=" mx-20 px-4 py-8 sm:px-8 ml-64">
-
-        <div class="overflow-y-hidden rounded-lg border">
+        <div class="overflow-y-hidden rounded-lg border ">
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead>
@@ -35,25 +40,27 @@
                     <tbody class="text-gray-500">
                         <tr>
                             @foreach ($annonces as $annonce)
-                            @foreach ($annonce->images as $key => $image)
-                            @if ($key == 0)
-                                <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                    <div class="flex items-center">
-                                        <div class="h-10 w-10 flex-shrink-0">
-                                            <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}" alt="" />
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="whitespace-no-wrap">{{ $annonce->title }}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                @endif
+                                @foreach ($annonce->images as $key => $image)
+                                    @if ($key == 0)
+                                        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="whitespace-no-wrap">{{ $annonce->title }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    @endif
                                 @endforeach
                                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                     <p class="whitespace-no-wrap">{{ $annonce->location }}</p>
                                 </td>
                                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                    <p class="whitespace-no-wrap"> {{ $annonce->category ? $annonce->category->name : 'original' }}</p>
+                                    <p class="whitespace-no-wrap">
+                                        {{ $annonce->category ? $annonce->category->name : 'original' }}</p>
 
                                 </td>
                                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -81,23 +88,22 @@
 
                                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                     @if ($annonce->status == 'confirmed')
-                                    <form method="POST" action="{{ route('admin.rejectAnnoces', $annonce->id) }}">
-                                        @method('PATCH')
-                                        @csrf
-                                      
-                                            <button type="submit" class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Refuse</button>
-                                      
-                                       
-                                    </form>
+                                        <form method="POST" action="{{ route('admin.rejectAnnoces', $annonce->id) }}">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button type="submit"
+                                                class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Refuse</button>
+                                        </form>
                                     @elseif ($annonce->status == 'pending' || $annonce->status == 'refused')
-                                    <form method="POST" action="{{ route('admin.validateAnnonce', $annonce->id) }}">
-                                        @method('PATCH')
-                                        @csrf  
-                                        <button type="submit" class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Accept</button>
-                                    </form>
+                                        <form method="POST" action="{{ route('admin.validateAnnonce', $annonce->id) }}">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button type="submit"
+                                                class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Accept</button>
+                                        </form>
                                     @endif
                                 </td>
-                                
+
                         </tr>
                         @endforeach
                     </tbody>

@@ -44,8 +44,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-
 Route::middleware(['auth', 'user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/create', [AnnonceController::class, 'create'])->name('create');
@@ -63,7 +61,9 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::put('/annonces/{annonce}', [AnnonceController::class, 'confirm']);
     });
 });
+
 Route::get('annonces/show/{id}', [AnnonceController::class, 'show'])->name('show');
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
@@ -72,10 +72,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/storecat', [CategoryController::class, 'store'])->name('storecat');
         Route::delete('/destroycat/{id}', [CategoryController::class, 'destroy'])->name('destroycat');
         Route::put('/update', [CategoryController::class, 'update'])->name('update');
-        // stats
+        
         Route::get('/annonces',[AdminController::class,'annonces'])->name('annonces');
         Route::patch('/validateAnnonce/{annonce}',[AdminController::class,'acceptAnnoces'])->name('validateAnnonce');
         Route::patch('/rejectAnnoces/{annonce}',[AdminController::class,'rejectAnnoces'])->name('rejectAnnoces');
+        // stats
+        Route::get('/stats', [AdminController::class, 'stats'])->name('stats');
+
    
     });
 });

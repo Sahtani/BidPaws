@@ -72,7 +72,6 @@ class AnnonceController extends Controller
                 $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }
-
          return redirect()->route('user.my-listings')->with(['success' => 'Annonce créée avec succès.']);
     }
 
@@ -84,9 +83,7 @@ class AnnonceController extends Controller
     public function show($id)
     {
         $annonce = Annonce::with('category', 'images','user')->findOrFail($id);
-
         $annonce->increment('views');
-
         return view('show', compact('annonce'));
     }
     public function myListings()

@@ -32,55 +32,53 @@ class AdminController extends Controller
     {
         $users = User::where('role', 'user')->get();
         $user = $this->getUser();
-        return view('admin.users', compact('users','user'));
+        $totalUsers = User::where('role','user')->count();
+        return view('admin.users', compact('users','user','totalUsers'));
     }
 
     public function annonces()
-    {
+    { $user = $this->getUser();
         $annonces = Annonce::with('category','images')->get();
-        return view('admin.annonces', compact('annonces'));
+        return view('admin.annonces', compact('annonces','user'));
     }
 
     public function acceptAnnoces(Annonce $annonce)
     {
         $annonce->status = 'confirmed';
         $annonce->save();
-        return back()->with('success', 'Annoce accepted successfully.');
+        return back()->with('success', 'Annonce accepted successfully.');
     }
 
-    public function rejectAnnoces(Annonce $annoce)
+    public function rejectAnnoces(Request $request, Annonce $annonce)
     {
-        $annoce->status = 'refused';
-        $annoce->save();
-        return back()->with('success', 'Annoce rejected successfully.');
+        $annonce->update($request->only('status'));
+        return back()->with('success', 'Annonce rejected successfully.');
     }
+    
 
     public function stats()
-    {
-        // Nombre total d'utilisateurs
+    { 
+        $user = $this->getUser();
+
         $totalUsers = User::count();
 
-        // Nombre total d'annonces
         $totalAnnonces = Annonce::count();
 
-        // Répartition des annonces par catégorie
         $annoncesByCategory = Annonce::select('category_id', DB::raw('count(*) as total'))->groupBy('category_id')->get();
 
-        // Utilisateurs actifs au cours des dernières 24 heures
-        $activeUsersLast24Hours = User::where('last_login_at', '>', now()->subHours(24))->count();
 
-        // Nombre d'annonces publiées par utilisateur
         $annoncesByUser = User::withCount('annonces')->orderByDesc('annonces_count')->get();
 
-        // Créer un tableau associatif contenant toutes les statistiques collectées
         $stats = [
             'totalUsers' => $totalUsers,
             'totalAnnonces' => $totalAnnonces,
             'annoncesByCategory' => $annoncesByCategory,
-            'activeUsersLast24Hours' => $activeUsersLast24Hours,
             'annoncesByUser' => $annoncesByUser,
+            'user'=>$user
         ];
 
-        return $stats;
+        // return $stats;
+        return view('admin.stats', compact('stats'));
+
     }
 }

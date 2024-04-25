@@ -15,9 +15,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
+    {{-- js --}}
     <script src="{{ asset('js/pop-up.js') }}"></script>
-    
+    <script src="{{ asset('js/image.js') }}"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -197,11 +198,11 @@
             margin-top: -20px;
             text-align: right;
         }
-        .rotate {
-    transform: rotate(6deg);
-    transition: transform 0.3s ease-in-out; 
-}
 
+        .rotate {
+            transform: rotate(6deg);
+            transition: transform 0.3s ease-in-out;
+        }
     </style>
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -209,7 +210,7 @@
 </head>
 
 <body class="bg-gray-200 font-[sans-serif]">
-  
+
     <x-nav />
     <section>
         @yield('content')
@@ -231,8 +232,8 @@
             },
         });
     </script>
-   
-        <x-footer />
+
+    <x-footer />
     <script src="{{ asset('js/carousel.js') }}"></script>
     <script>
         (function() {
@@ -268,7 +269,7 @@
             })(jQuery);
         })();
     </script>
-  
+
 </body>
 
 <html

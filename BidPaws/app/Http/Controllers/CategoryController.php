@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -12,9 +13,9 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {  $user= Auth::user();
         $categories = Category::all();
-        return view('admin.categories', compact('categories'));
+        return view('admin.categories', compact('categories','user'));
     }
 
     /**
