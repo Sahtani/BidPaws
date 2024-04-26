@@ -59,7 +59,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('/annonces/create', [AnnonceController::class, 'create']);
         Route::post('/annonces', [AnnonceController::class, 'store'])->name('store');
         Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
-        Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('annonces.update');
+        Route::put('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('update');
         Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('annonces.destroy');
         Route::post('/addToFavorites/{id}', [FavoriteController::class, 'addToFavorites'])->name('addToFavorites');
 
