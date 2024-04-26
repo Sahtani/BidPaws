@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client; 
 
 class AnnonceController extends Controller
 {

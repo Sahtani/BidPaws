@@ -32,7 +32,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         Auth::login($user);
-        return redirect()->route('profile.edit')->with('success', 'Registration successful!');
+        return redirect()->route('user.profile')->with('success', 'Registration successful!');
     }
     public function login(Request $request)
     {
@@ -46,12 +46,10 @@ class AuthController extends Controller
         }
         Auth::login($user);
         if ($user->isAdmin()) {
-                redirect()->route('admin.categories')->with('success', 'Welcome back!');
-            // return  view('admin.stats');
-            // redirect()->route('admin.stats')->with('success', 'Welcome back!');
+                redirect()->route('admin.stats')->with('success', 'Welcome back!');
         }
 
-        return redirect()->route('profile.edit')->with('sucsess', 'welckom back ');
+        return redirect()->route('user.profile')->with('sucsess', 'welckom back ');
     }
 
     public function logout()

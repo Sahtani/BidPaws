@@ -39,6 +39,10 @@ Route::get('/about-us', function () {
     return view('about-us');
 })->name('about-us');
 
+// Route::get('/profile', function () {
+//     return view('user.user-profil');
+// })->name('profile');
+
 Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
 Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -47,6 +51,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
+        // profile
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
         Route::get('/create', [AnnonceController::class, 'create'])->name('create');
         Route::get('/annonces', [AnnonceController::class, 'index']);
         Route::get('/annonces/create', [AnnonceController::class, 'create']);
@@ -93,12 +100,12 @@ Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('
 
 // Profile user
 
-Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-});
+// Route::middleware(['auth', 'user'])->group(function () {
+//     
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+// });
 
 
 Route::get('/villes', [VilleController::class, 'getVilles']);
