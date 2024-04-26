@@ -5,6 +5,7 @@ use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
@@ -53,7 +54,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
         Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('annonces.update');
         Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('annonces.destroy');
-        
+        Route::post('/addToFavorites/{id}', [FavoriteController::class, 'addToFavorites'])->name('addToFavorites');
 
 
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');

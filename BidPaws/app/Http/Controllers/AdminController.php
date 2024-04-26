@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Annonce;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,9 +61,12 @@ class AdminController extends Controller
     { 
         $user = $this->getUser();
 
-        $totalUsers = User::count();
+        $totalUsers = User::where('role','user')->count();
+        $userBand = User::where('access','1')->count();
 
         $totalAnnonces = Annonce::count();
+
+        $categories=Category::count();
 
         $annoncesByCategory = Annonce::select('category_id', DB::raw('count(*) as total'))->groupBy('category_id')->get();
 
@@ -74,7 +78,9 @@ class AdminController extends Controller
             'totalAnnonces' => $totalAnnonces,
             'annoncesByCategory' => $annoncesByCategory,
             'annoncesByUser' => $annoncesByUser,
-            'user'=>$user
+            'user'=>$user,
+            'categories'=>$categories,
+            'userBand'=>$userBand
         ];
 
         // return $stats;

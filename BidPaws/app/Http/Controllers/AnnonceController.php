@@ -30,8 +30,7 @@ class AnnonceController extends Controller
     public function recentAnnouncements()
     {
 
-        $annonces = Annonce::with('images')->latest()->get();
-
+        $annonces = Annonce::with('images')->latest()->take(4)->get();
         return view('home', compact('annonces'));
     }
 
@@ -68,7 +67,6 @@ class AnnonceController extends Controller
             foreach ($request->file('images') as $image) {
                 $image = $image->store('public/annonceImages');
                 $imagePath = explode("/", $image);
-                // $annonceImages=AnnonceImage::create(['image_path' => $imagePath[2], 'annonce_id' => $annonce->id]);
                 $annonce->images()->create(['image_path' => $imagePath[2]]);
             }
         }

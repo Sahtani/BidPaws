@@ -31,7 +31,7 @@
 
                             </li>
                             <li>
-                                <a href="#" type="button"
+                                <a href="{{ route('about-us') }}" type="button"
                                     class="uppercase font-semibold  hover:text-yell focus:outline-none  text-sm px-6 py-2.5 text-center">About</a>
 
                             </li>
@@ -108,9 +108,6 @@
                                                             class="hover:text-yell px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer">
                                                             <span class="flex-1">profile</span> </a>
                                                     </li>
-
-
-
                                                 </ul>
                                             </div>
                                         </div>

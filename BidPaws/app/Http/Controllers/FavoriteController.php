@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Annonce;
 use App\Models\Favorite;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -17,22 +19,29 @@ class FavoriteController extends Controller
 
         return view('favorites.index', ['favorites' => $favorites]);
     }
-    public function addToFavorites(Request $request, $annonce_id)
+    public function addToFavorites(Request $request, $id)
     {
-        $user = $request->user();
+       
+        $user = auth()->user();
 
-        $favorite = Favorite::where('user_id', $user->id)
-            ->where('annonce_id', $annonce_id)
-            ->first();
+        $annonce = Annonce::findOrFail($id);
 
-        if ($favorite) {
-            $favorite->delete();
-            return back()->with('success', 'Annonce retirée des favoris avec succès');
-        } else {
-            $newFavorite = new Favorite();
-            $newFavorite->user_id = $user->id;
-            $newFavorite->annonce_id = $annonce_id;
-            $newFavorite->save();
+        $isFavorite = $user->favorites()->where('annonce_id', $id)->exists();
+
+        if ($isFavorite) {
+            // Supprimer l'annonce des favoris de l'utilisateur
+            $user->favorites()->where('annonce_id', $annonce->id)->delete();
+            
+            // Redirection avec un message
+            return redirect()->back()->with('success', 'The announcement has been removed from your favorites.');
         }
+
+        $favorite = new Favorite();
+        $favorite->user_id = $user->id;
+        $favorite->annonce_id = $annonce->id;
+        $favorite->save();
+
+        return redirect()->back()->with('success', 'The announcement has been added to your favorites.');
+   
     }
 }

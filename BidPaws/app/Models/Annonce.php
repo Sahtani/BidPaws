@@ -47,4 +47,8 @@ class Annonce extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+    public function isFavorite()
+    {
+        return $this->favorites()->where('user_id', auth()->id())->exists();
+    }
 }
