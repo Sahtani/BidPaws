@@ -39,6 +39,10 @@ Route::get('/about-us', function () {
     return view('about-us');
 })->name('about-us');
 
+Route::get('/chat', function () {
+    return view('chat');
+})->name('chat');
+
 // Route::get('/profile', function () {
 //     return view('user.user-profil');
 // })->name('profile');

@@ -148,7 +148,6 @@ class AnnonceController extends Controller
         $category = $request->input('search_category');
         $location = $request->input('search_location');
 
-        // Construisez votre requête en fonction des critères de recherche
         $annonces = Annonce::query();
 
         if ($title) {
