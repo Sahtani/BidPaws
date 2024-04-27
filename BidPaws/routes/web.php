@@ -59,10 +59,10 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::get('/annonces/create', [AnnonceController::class, 'create']);
         Route::post('/annonces', [AnnonceController::class, 'store'])->name('store');
         Route::get('annonces/{id}/edit', [AnnonceController::class, 'edit'])->name('edit');
-        Route::put('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('update');
-        Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('annonces.destroy');
+        Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('update');
+        Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('delete');
         Route::post('/addToFavorites/{id}', [FavoriteController::class, 'addToFavorites'])->name('addToFavorites');
-
+ 
 
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');
 
@@ -71,6 +71,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 });
 
 Route::get('annonces/show/{id}', [AnnonceController::class, 'show'])->name('show');
+Route::post('/annonces/search', [AnnonceController::class, 'search'])->name('annonces.search');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {

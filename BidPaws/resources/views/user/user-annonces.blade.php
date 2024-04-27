@@ -1,12 +1,15 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-slate-100 ">
+    <div class="relative min-h-screen flex-col justify-center overflow-hidden bg-slate-100 ">
         <div class="min-h-28  ">
-            <div class="max-w-screen-lg mx-auto py-4 md:mt-6">
+            <div class="max-w-screen-lg mx-auto py-6 md:mt-6">
                 <h2 class="font-bold text-center text-xl md:text-6xl text-950 hover:text-yell  ">
                     Your listings
                 </h2>
+                @if($annonces->isEmpty())
+                <p class="text-xl text-950 font-bold">No annonces found.</p>
+            @else
                 <div class="md:grid md:grid-cols-3  sm:flex sm:items-center sm:justify-center  gap-4 mt-6">
                     @foreach ($annonces as $annonce)
                         <a href="{{ route('show', $annonce->id) }}">
@@ -71,7 +74,9 @@
                                 </div>
                                 <div
                                     class="flex items-center justify-between mt-4 gap-6 border-t border-slate-200 text-950 p-0 ">
-                                    <form action="" method="POST"
+                                    <div class="text-blue-900  font-bold mr-4 ">{{ $annonce->views }} Views</div>
+                                    <div class="flex gap-4">
+                                        <form action="{{ route('user.delete', $annonce->id) }}" method="POST"
                                         class="mt-4 inline-block text-blue-600 text-sm hover:underline">
                                         @method('DELETE')
                                         @csrf
@@ -88,30 +93,30 @@
                                             </svg>
                                         </button>
                                     </form>
-                                    <a href="{{ route('user.update', $annonce->id) }}"
-                                        class="mt-4 inline-block text-blue-600 text-sm hover:underline">
-
-                                        <button type="button" class="focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24"
-                                                style="fill: rgba(36, 196, 36, 1);transform: ;msFilter:;">
-                                                <path
-                                                    d="m18.988 2.012 3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287-3-3L8 13z">
-                                                </path>
-                                                <path
-                                                    d="M19 19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                    </a>
-                                    <div class="text-blue-900  font-bold mr-4 ">{{ $annonce->views }} Views</div>
-                                </div>
-
+                                    <form action="{{ route('user.update', $annonce->id) }}" method="POST" class="mt-4 inline-block text-blue-600 text-sm hover:underline">
+                                        @csrf
+                                        @method('PATCH')
+                                         <button type="submit" class="focus:outline-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24"
+                                                    style="fill: rgba(36, 196, 36, 1);transform: ;msFilter:;">
+                                                    <path
+                                                        d="m18.988 2.012 3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287-3-3L8 13z">
+                                                    </path>
+                                                    <path
+                                                        d="M19 19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                    </form>
+                                    </div>
+                                 </div>
                             </div>
                         </div>
                         </a>
                         @endforeach
             </div>
+            @endif
         </div>
     </div>
     

@@ -22,13 +22,16 @@ class AnnonceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|min:10',
             'price' => 'required|numeric',
             'location' => 'required|string',
             'age' => 'required|integer',
             'images' => 'required|array|max:3',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'sometimes|string', 
+            'views' => 'sometimes|integer', 
+    
         ];
     }
 }

@@ -22,16 +22,21 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-
         $annonces = Annonce::with(['images', 'category'])->paginate(6);
         return view('allannonces', compact('annonces'));
     }
 
     public function recentAnnouncements()
     {
-
         $annonces = Annonce::with('images')->latest()->take(4)->get();
-        return view('home', compact('annonces'));
+        $categories=Category::all();
+        $villesJsonPath = storage_path('villes_maroc.json');
+        if (File::exists($villesJsonPath)) {
+            $villes = json_decode(File::get($villesJsonPath));
+        } else {
+            $villes = [];
+        }
+        return view('home', compact('annonces','categories','villes'));
     }
 
     /**
@@ -39,7 +44,6 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
             $villes = json_decode(File::get($villesJsonPath));
@@ -59,8 +63,6 @@ class AnnonceController extends Controller
         $validatedData = $request->validated();
         $user = User::find(Auth::user()->id);
         $user->role = 'user';
-
-      
         $annonce = $user->annonces()->create($validatedData);
 
         if ($request->hasFile('images')) {  
@@ -97,7 +99,6 @@ class AnnonceController extends Controller
     {
         $categories = Category::all();
         $annonce = Annonce::with('category', 'images')->findOrFail($id);
-
         return view('user.update', compact('annonce', 'categories'));
     }
 
@@ -105,11 +106,10 @@ class AnnonceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(AnnonceRequest $request, $id)
     {
 
         $validatedData = $request->validated();
-        // Mettre à jour l'annonce
         $annonce = Annonce::findOrFail($id);
         $annonce->title = $validatedData['title'];
         $annonce->description = $validatedData['description'];
@@ -134,12 +134,42 @@ class AnnonceController extends Controller
      */
     public function destroy($id)
     {
-        // avec images 
         $annonce = Annonce::findOrFail($id);
+        $annonce->images()->delete();
         $annonce->delete();
 
-        return redirect()->route('annonces.index')->with('success', 'Announcement deleted successfully.');
+        return redirect()->route('user.my-listings')->with('success', 'Announcement deleted successfully.');
     }
+
+
+    public function search(Request $request)
+    {
+        $title = $request->input('search_title');
+        $category = $request->input('search_category');
+        $location = $request->input('search_location');
+
+        // Construisez votre requête en fonction des critères de recherche
+        $annonces = Annonce::query();
+
+        if ($title) {
+            $annonces->where('title', 'like', "%$title%");
+        }
+
+        if ($category) {
+            $annonces->where('category_id', $category);
+        }
+
+        if ($location) {
+            $annonces->where('location', $location);
+        }
+
+        $results = $annonces->get();
+        return response()->json($results);
+        // return view('annonces.search_results', ['annonces' => $results]);
+    }
+    // search by city
+
+
     public function searchByVille(Request $request)
     {
         $ville = $request->input('ville');
@@ -148,7 +178,7 @@ class AnnonceController extends Controller
 
         return view('home', ['annonces' => $annonces]);
     }
-
+   // filtre by category   
     public function filterByCategory($category_id)
     {
         
