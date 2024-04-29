@@ -89,11 +89,6 @@
                                             <div class="bg-white rounded w-full relative z-10 py-1">
                                                 <ul class="list-reset text-950 font-semibold">
                                                     <li>
-                                                        <a href="{{ route('user.create') }}"
-                                                            class="hover:text-yell px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer">
-                                                            <span class="flex-1">Add announcement </span> </a>
-                                                    </li>
-                                                    <li>
                                                         <a href="{{ route('user.my-listings') }}"
                                                             class="hover:text-yell px-4 py-2 flex md:w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer">
                                                             <span class="flex-1">my listings</span> </a>

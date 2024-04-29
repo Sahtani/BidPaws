@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('annonces', function (Blueprint $table) {
-            $table->unsignedInteger('views')->default(0); // Ajouter une colonne 'views' de type unsigned integer avec une valeur par défaut de 0
+            $table->string('age')->change();
         });
     }
 

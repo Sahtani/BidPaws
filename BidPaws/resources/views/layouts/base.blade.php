@@ -24,6 +24,7 @@
     {{-- include app.js and app.css --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+
     <script>
         tailwind.config = {
             theme: {
@@ -227,53 +228,10 @@
 
     <script>
         CKEDITOR.replace('description');
-        var swiper = new Swiper('.swiper-container', {
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
     </script>
 
     <x-footer />
     <script src="{{ asset('js/carousel.js') }}"></script>
-    <script>
-        (function() {
-            "use strict";
-
-            var carousels = function() {
-                $(".owl-carousel1").owlCarousel({
-                    loop: true,
-                    center: true,
-                    margin: 0,
-                    responsiveClass: true,
-                    nav: false,
-                    responsive: {
-                        0: {
-                            items: 1,
-                            nav: false
-                        },
-                        680: {
-                            items: 2,
-                            nav: false,
-                            loop: false
-                        },
-                        1000: {
-                            items: 3,
-                            nav: true
-                        }
-                    }
-                });
-            };
-
-            (function($) {
-                carousels();
-            })(jQuery);
-        })();
-    </script>
       <script>
         window.User = {
             id: '{{optional(auth()->user())->id}}',

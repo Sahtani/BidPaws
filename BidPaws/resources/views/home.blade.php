@@ -32,68 +32,68 @@
                         </div>
                     </a>
                 </div>
-                    <div class="w-full max-w-sm mt-20 mx-auto">
-                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('annonces.search') }}" method="POST">
-                            @csrf 
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                    Find your animal!
-                                </label>
-                                <div class="relative mb-4">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <i class="fas fa-search text-gray-500"></i>
-                                    </div>
-                                    <input
-                                        class="block w-full pl-12 pr-3 py-2 text-gray-700 rounded border focus:outline-none focus:shadow-outline"
-                                        type="text" name="search_title" placeholder="What do you seek?">
+                <div class="w-full max-w-sm mt-20 mx-auto">
+                    <form id="searchForm"  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('annonces.search') }}"
+                        method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                Find your animal!
+                            </label>
+                            <div class="relative mb-4">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-search text-gray-500"></i>
                                 </div>
-                                <div class="flex items-center mb-4">
-                                    <div class="relative flex-1  gap-2">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <i class="fas fa-dog text-gray-500 "></i>
-                                        </div>
-                                        <select name="search_category"
-                                            class="block w-full pl-12 px-6 py-4  rounded border focus:outline-none focus:shadow-outline">
-                                            <option class="pl-3 pr-6 py-2 text-gray-700" disabled selected> Categories
-                                            </option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="flex items-center mb-4 ">
-                                    <div class="relative flex-1 ">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <i class="fas fa-map-pin text-gray-500"></i>
-                                        </div>
-                                        <select name="search_location" id="ville"
-                                            class="block w-full pl-12 px-6 py-4 text-gray-700 rounded border focus:outline-none focus:shadow-outline" ">
-                                        <option disabled selected value="">Select a city</option>
-                                         @foreach ($villes as $ville)
-                                            <option value="{{ $ville }}">{{ $ville }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div>
-                                    <button
-                                        class="w-full flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-900 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        <span>Chercher</span>
-                                        <svg class="w-8 h-8 ml-3 -mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 4.418 3.582 8 8 8v-4zm16-5.291a7.962 7.962 0 01-2 5.291V20c4.418 0 8-3.582 8-8h-4zM12 4.708V9.3a7.962 7.962 0 012-5.292H12z">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </div>
-
+                                <input
+                                    class="block w-full pl-12 pr-3 py-2 text-gray-700 rounded border focus:outline-none focus:shadow-outline"
+                                    type="text" name="search_title" placeholder="What do you seek?">
                             </div>
-                        </form>
-                    </div>
+                            <div class="flex items-center mb-4">
+                                <div class="relative flex-1  gap-2">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <i class="fas fa-dog text-gray-500 "></i>
+                                    </div>
+                                    <select name="search_category"
+                                        class="block w-full pl-12 px-6 py-4  rounded border focus:outline-none focus:shadow-outline">
+                                        <option class="pl-3 pr-6 py-2 text-gray-700" disabled selected> Categories
+                                        </option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex items-center mb-4 ">
+                                <div class="relative flex-1 ">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <i class="fas fa-map-pin text-gray-500"></i>
+                                    </div>
+                                    <select name="search_location" id="ville"
+                                        class="block w-full pl-12 px-6 py-4 text-gray-700 rounded border focus:outline-none focus:shadow-outline" ">
+                                            <option disabled selected value="">Select a city</option>
+                                              @foreach ($villes as $ville)
+                                        <option value="{{ $ville }}">{{ $ville }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <button
+                                    class="w-full flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-900 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <span>Chercher</span>
+                                    <svg class="w-8 h-8 ml-3 -mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10"
+                                            stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 4.418 3.582 8 8 8v-4zm16-5.291a7.962 7.962 0 01-2 5.291V20c4.418 0 8-3.582 8-8h-4zM12 4.708V9.3a7.962 7.962 0 012-5.292H12z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
             </div>
 
         </section>
@@ -101,11 +101,11 @@
             <div class="min-h-28 ">
                 <div class="max-w-screen-lg mx-auto py-4">
                     <div class="flex justify-between items-center">
-                        <h1 class="text-4xl font-black  text-950">
+                        <h1 id="title" class="text-4xl font-black  text-950">
                             Recent announcements
                         </h1>
-                        <div class="ml-4">
-                            <a href="{{ route('allannoces') }}"
+                        <div  class="ml-4">
+                            <a id="button" href="{{ route('allannoces') }}"
                                 class="bg-yell  text-white font-bold py-2 px-8 rounded text-xl">
                                 All listings
                                 <svg class="w-4 h-4 inline-block ml-4" xmlns="http://www.w3.org/2000/svg"
@@ -118,16 +118,16 @@
                         </div>
                     </div>
 
-                    <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mt-6">
+                    <div  id="announcementGrid" class="grid md:grid-cols-3 grid-cols-1 gap-4 mt-6">
                         @foreach ($annonces as $annonce)
                             <a href="{{ route('show', $annonce->id) }}">
-                                <div class="px-2 w-full h-96 border border-white rounded-lg bg-white mr-2 shadow-xl">
+                                <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
                                     <div class="p-2">
                                         @foreach ($annonce->images as $key => $image)
                                             @if ($key == 0)
                                                 <div class="swiper-slide relative">
                                                     <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}"
-                                                        alt="Image" class="rounded" width=300" height="400">
+                                                        alt="Image" class="rounded h-60 w-96">
                                                     <div class="flex items-center justify-center">
                                                         <div
                                                             class="absolute top-30 left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
@@ -140,8 +140,6 @@
                                             @break
                                         @endif
                                     @endforeach
-
-
                                     <div class="flex flex-col mt-2 ml-8">
                                         <h3 class="font-semibold text-950">{{ ucfirst($annonce->title) }}
                                         </h3>
@@ -212,8 +210,6 @@
                                                 </button>
                                             </div>
                                         </form>
-
-
                                         <div class="text-blue-900  font-bold mr-4 ">{{ $annonce->views }} Views</div>
                                     </div>
                                 </div>
@@ -221,8 +217,7 @@
                         </a>
                     @endforeach
                 </div>
-
-
+                <div id="searchResults" class="hidden"></div>
             </div>
         </div>
     </div>
@@ -258,6 +253,32 @@
             button.classList.remove('rotate');
         });
     });
+</script>
+<script>
+    $(document).ready(function() {
+    $('#searchForm').submit(function(event) {
+        event.preventDefault(); 
+
+        var formData = $(this).serialize(); 
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            success: function(response) {
+                $('#searchResults').html(response);
+                $('#announcementGrid').hide();
+                $('#title').hide();
+
+               $('#searchResults').html(response).show();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
 </script>
 
 {{-- <script>
@@ -296,4 +317,5 @@
         });
     });
 </script> --}}
+
 @endsection

@@ -17,14 +17,11 @@ return new class extends Migration
             $table->text('description');
             $table->float('price');
             $table->string('location');
-            $table->integer('age'); 
+            $table->integer('age')->nullable()->default(0); 
             $table->json('image')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'refused'])->default('pending');
-            $table->foreignIdFor('user')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('views')->default(0);
-          
-
-
             $table->timestamps();
         });
     }

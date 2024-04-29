@@ -24,9 +24,9 @@ class AnnonceRequest extends FormRequest
         return [
             'title' => 'required|string|min:3',
             'description' => 'required|string|min:10',
-            'price' => 'required|numeric',
+            'price' => 'nullable|numeric',
             'location' => 'required|string',
-            'age' => 'required|integer',
+            'age' => 'required|string|min:2',
             'images' => 'required|array|max:3',
             'category_id' => 'required|exists:categories,id',
             'status' => 'sometimes|string', 

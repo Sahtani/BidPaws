@@ -1,4 +1,3 @@
-
 @extends('layouts.base')
 
 @section('content')
@@ -11,7 +10,7 @@
 
             <div class="form h-fit  bg-white border md:w-3/5 ">
                 <ul class="tab-group rounded-full">
-                    <li class="tab active bg-gray-200 "><a href="{{ route('sign-up') }}" id="signup-link" >Sign Up</a></li>
+                    <li class="tab active bg-gray-200 "><a href="{{ route('sign-up') }}" id="signup-link">Sign Up</a></li>
                     <li class=" bg-950"><a href="{{ route('log-in') }}" id="login-link">Log In</a></li>
                 </ul>
 
@@ -42,25 +41,24 @@
                                 </svg>
                                 <input class="pl-2 outline-none border-none w-full" type="password" name="password"
                                     id="password" placeholder="Password">
-                                   
+
                             </div>
-                           
                             <div class="flex items-center justify-between  gap-12 my-4">
                                 <div>
-                                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input type="checkbox" name="remember" id="remember"
+                                        {{ old('remember') ? 'checked' : '' }}>
                                     <label class="text-950 font-semibold" for="remember">Remember me</label>
                                 </div>
-                              <div>
-                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                    <p class="text-950 font-semibold" ><a href="#">Forgot Password?</a></p>
-                              </div>
-                             
+                                <div>
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    <p class="text-950 font-semibold"><a href="#">Forgot Password?</a></p>
+                                </div>
+
                             </div>
-                                <button
-                                class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2 group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
-   hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">Log
-   In
-                                </button>
+                            <button
+                                class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2 group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300">Log
+                                In
+                            </button>
                             <div class=" grid space-y-4 mt-4">
                                 <button
                                     class="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
@@ -73,21 +71,5 @@
                                             with Google</span>
                                     </div>
                                 </button>
-                            
-       </div>
-
-    <script>
-        // $(document).ready(function() {
-        //     $('#signup-link').click(function(e) {
-        //         e.preventDefault();
-        //         loadSignUpForm();
-        //     });
-
-        //     function loadSignUpForm() {
-        //         $.get("{{ route('sign-up') }}", function(data) {
-        //             $('body').html(data);
-        //         });
-        //     }
-        // });
-    </script>
-@endsection
+                            </div>
+                        @endsection

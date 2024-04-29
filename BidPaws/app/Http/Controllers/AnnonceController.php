@@ -161,10 +161,16 @@ class AnnonceController extends Controller
         if ($location) {
             $annonces->where('location', $location);
         }
-
-        $results = $annonces->get();
-        return response()->json($results);
-        // return view('annonces.search_results', ['annonces' => $results]);
+        $categories=Category::all();
+        $villesJsonPath = storage_path('villes_maroc.json');
+        if (File::exists($villesJsonPath)) {
+            $villes = json_decode(File::get($villesJsonPath));
+        } else {
+            $villes = [];
+        }
+        $annonces = $annonces->get();
+        // return response()->json($results);
+        return view('user.search',compact('annonces'));
     }
     // search by city
 

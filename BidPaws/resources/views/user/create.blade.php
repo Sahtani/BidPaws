@@ -21,8 +21,8 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="title" value="{{ old('title') }}" 
-                                    class=" rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
+                                <input type="text" name="title" value="{{ old('title') }}"  placeholder="Name of your pet ..."
+                                    class=" rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-gray-400 focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('title')" class="my-2" />
                         </div>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="mt-4">
                                 <select name="category_id" id="category"
-                                    class=" rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-yell focus:outline-none">
+                                    class=" rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-gray-400 focus:outline-none">
                                     <option disabled selected value="">Select a category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -52,8 +52,8 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="number" name="price" value="{{ old('price') }}"
-                                    class="rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
+                                <input type="number" name="price" value="{{ old('price') }}" placeholder="Enter price ..."
+                                    class="rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-gray-400 focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('price')" class="my-2" />
                         </div>
@@ -65,8 +65,8 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <select name="location" value="{{ old('location') }}" id="ville"
-                                    class="rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-yellow focus:outline-none">
+                                <select name="location" value="{{ old('location') }}" id="ville"  placeholder="Enter city ..."
+                                    class="rounded block w-full px-4 py-3 border bg-gray-200 sm:text-sm border-gray-400 focus:outline-none">
                                     <option disabled selected value="">Select a city</option>
                                     @foreach ($villes as $ville)
                                         <option value="{{ $ville }}">{{ $ville }}</option>
@@ -83,8 +83,8 @@
                                 <span class="text-yell">*</span>
                             </div>
                             <div class="mt-4">
-                                <input type="text" name="age" value="{{ old('age') }}"
-                                    class="rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-yell focus:outline-none">
+                                <input type="text" name="age" value="{{ old('age') }}" placeholder="Enter age ..."
+                                    class="rounded block w-full px-4 py-3 border  bg-gray-200  sm:text-sm border-gray-400 focus:outline-none">
                             </div>
                             <x-input-error :messages="$errors->get('age')" class="my-2" />
                         </div>
