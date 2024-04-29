@@ -5,11 +5,17 @@ use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
 use Illuminate\Support\Facades\Route;
+use Pusher\Pusher;
+
+
+
 
 
 
@@ -39,13 +45,23 @@ Route::get('/about-us', function () {
     return view('about-us');
 })->name('about-us');
 
-Route::get('/chat', function () {
-    return view('chat');
-})->name('chat');
+// Route::get('/chat', function () {
+//     return view('chat');
+// })->name('chat');
 
 // Route::get('/profile', function () {
 //     return view('user.user-profil');
 // })->name('profile');
+
+// Message
+Route::get('/chat', [ConversationController::class, 'index'])->name('chat');
+Route::post('/ReadMessages', [MessageController::class , 'readMessages']);
+Route::post('/messages/send', [MessageController::class ,'store']);
+Route::get('/user/conversations', [ConversationController::class, 'getUserConversations'])->name('user.conversations');
+
+
+
+
 
 Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
 Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');
@@ -97,7 +113,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
-Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
+// Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
 
 Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('annonces.category');
 

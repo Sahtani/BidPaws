@@ -4,12 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Annonce;
+use App\Models\Conversation;
+use App\Models\Favorite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Favorite;
-use Illuminate\Database\Eloquent\SoftDeletes;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -67,6 +69,37 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->hasMany(Favorite::class) ;
+    }
+
+
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
+
+
+    public function sentConversations()
+    {
+        return $this->hasMany(Conversation::class, 'user_id');
+    }
+
+
+    public function receivedConversations()
+    {
+        return $this->hasMany(Conversation::class, 'friend_id');
+    }
+
+
+    public function unreadMessagesCount()
+    {
+        
+        $conversations = $this->conversations()->withCount(['messages' => function ($query) {
+            $query->whereNull('read_at')->where('sender_id', '!=', $this->id);
+        }])->get();
+
+        $unreadMessagesCount = $conversations->sum('messages_count');
+
+        return $unreadMessagesCount;
     }
 
 }

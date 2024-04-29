@@ -15,6 +15,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    {{-- pusher link --}}
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     {{-- js --}}
     <script src="{{ asset('js/pop-up.js') }}"></script>
     <script src="{{ asset('js/image.js') }}"></script>
@@ -268,6 +271,11 @@
                 carousels();
             })(jQuery);
         })();
+    </script>
+      <script>
+        window.User = {
+            id: '{{optional(auth()->user())->id}}',
+        }
     </script>
 
 </body>
