@@ -21,6 +21,8 @@
     {{-- js --}}
     <script src="{{ asset('js/pop-up.js') }}"></script>
     <script src="{{ asset('js/image.js') }}"></script>
+    {{-- include app.js and app.css --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script>
         tailwind.config = {
