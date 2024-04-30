@@ -21,6 +21,7 @@
     {{-- js --}}
     <script src="{{ asset('js/pop-up.js') }}"></script>
     <script src="{{ asset('js/image.js') }}"></script>
+    <script src="{{ asset('js/apply.js') }}"></script>
     {{-- include app.js and app.css --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -81,7 +82,6 @@
             background-repeat: no-repeat;
             width: 100%;
             /* Largeur de l'image */
-            height: 100vh;
             /* Hauteur de l'image */
         }
 

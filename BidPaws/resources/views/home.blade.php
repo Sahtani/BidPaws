@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('content')
     <div class="">
-        <section class="containe  mx-auto px-4 sm:px-6 lg:px-8  relative">
+        <section class="containe h-fit md:h-screen mx-auto px-4 sm:px-6 lg:px-8  relative">
             @if (session('success'))
                 <div id="logoutPopup" class="w-1/3 pt-4" style="display: block;">
                     <div class="flex items-center p-4 w-1/2 p-4 ml-12  text-xl text-white rounded-lg bg-blue-500 dark:bg-gray-800 dark:text-blue-400"
@@ -20,12 +20,12 @@
             <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
                 <div class="flex flex-col">
                     <h1
-                        class=" title font-bold pt-20 pl-4 md:pl-8 text-6xl text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
+                        class=" title font-bold pt-20 pl-4 md:pl-8 md:text-6xl text-3xl  text-950 transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
                         YOUR BEST<br class="text-white"> FRIEND DESERVES<br> THE BEST
                     </h1>
 
                     </h1>
-                    <a href="#contact" class="w-fit pl-10 pt-4">
+                    <a href="#contact" class="w-fit md:pl-10 pl-4 pt-4">
                         <div id="button"
                             class="bg-yell text-white px-4 py-2 rounded hover:scale-20 transition duration-300 ease-in-out">
                             Create your free account now
@@ -70,8 +70,9 @@
                                     </div>
                                     <select name="search_location" id="ville"
                                         class="block w-full pl-12 px-6 py-4 text-gray-700 rounded border focus:outline-none focus:shadow-outline" ">
-                                                    <option disabled selected value="">Select a city</option>
-                                                        @foreach ($villes as $ville)
+                                                                    <option disabled selected value="">Select a city</option>
+                                                                            @foreach ($villes
+                                        as $ville)
                                         <option value="{{ $ville }}">{{ $ville }}</option>
                                         @endforeach
                                     </select>
@@ -79,34 +80,31 @@
                             </div>
                             <div>
                                 <button
-                                    class="w-full flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-900 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    <span>Chercher</span>
-                                    <svg class="w-8 h-8 ml-3 -mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10"
-                                            stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 4.418 3.582 8 8 8v-4zm16-5.291a7.962 7.962 0 01-2 5.291V20c4.418 0 8-3.582 8-8h-4zM12 4.708V9.3a7.962 7.962 0 012-5.292H12z">
+                                    class="w-full flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-white bg-indigo-900 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <span>Search</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                        <path
+                                            d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z">
                                         </path>
                                     </svg>
                                 </button>
                             </div>
-
                         </div>
                     </form>
                 </div>
             </div>
-
         </section>
         <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-slate-100 py-6 sm:py-12">
             <div class="min-h-28 ">
                 <div class="max-w-screen-lg mx-auto py-4">
-                    <div class="flex justify-between items-center">
-                        <h1 id="title" class="text-4xl font-black  text-950">
+                    <div class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center">
+                        <h1 id="title" class="md:text-4xl text-2xl md:pb-0 pb-4 font-black  text-950">
                             Recent announcements
                         </h1>
                         <div class="ml-4">
                             <a id="button" href="{{ route('allannoces') }}"
-                                class="bg-yell  text-white font-bold py-2 px-8 rounded text-xl">
+                                class="bg-950 text-white font-bold py-2 px-8 rounded text-xl">
                                 All listings
                                 <svg class="w-4 h-4 inline-block ml-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 8 14">
@@ -117,10 +115,9 @@
                             </a>
                         </div>
                     </div>
-
                     <div id="announcementGrid" class="grid md:grid-cols-3 grid-cols-1 gap-4 mt-6">
                         @foreach ($annonces as $annonce)
-                            <div class="px-2 w-full border border-white rounded-lg bg-white mr-2 shadow-xl">
+                            <div class=" w-full border border-white rounded-lg bg-white md:mr-2 sm:px-4 shadow-xl">
                                 <div class="p-2">
                                     @foreach ($annonce->images as $key => $image)
                                         @if ($key == 0)
@@ -229,27 +226,41 @@
                                     <div class="text-blue-900  font-bold mr-4 ">{{ $annonce->views }} Views</div>
                                 </div>
                                 @auth
-                                <form action="{{ route('user.requests.store', $annonce->id) }}" method="POST" class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
-                                    @csrf
-                                    @if($annonce->isAppliedByUser())
-                                        <button type="button" class="flex gap-2 text-green-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
-                                                <path d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z"></path>
-                                                <path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path>
+                                    @if ($annonce->isAppliedByUser())
+                                        <button type="button"
+                                            class=" w-full flex items-center justify-center gap-2 px-7 py-2 bg-950 text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24"
+                                                style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                                <path
+                                                    d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                </path>
                                             </svg>
                                             <span>Applied</span>
                                         </button>
                                     @else
-                                        <button type="submit" class="flex gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
-                                                <path d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z"></path>
-                                                <path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path>
-                                            </svg>
-                                            <span>Apply to Adopt</span>
-                                        </button>
+                                        <form id="adoptionForm" action="{{ route('user.requests.store', $annonce->id) }}"
+                                            method="POST"
+                                            class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+                                            @csrf
+
+                                            <input type="hidden" name="annonce_id" value="{{ $annonce->id }}">
+
+                                            <button id="applyButton" type="submit" class="flex gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
+                                                    <path
+                                                        d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z">
+                                                    </path>
+                                                    <path
+                                                        d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
+                                                    </path>
+                                                </svg>
+                                                <span>Apply to Adopt</span>
+                                            </button>
+                                        </form>
                                     @endif
-                                </form>
-                                
                                 @endauth
                                 @guest
                                     <a href="{{ route('log-in') }}"
@@ -370,4 +381,5 @@
         });
     });
 </script> --}}
+
 @endsection

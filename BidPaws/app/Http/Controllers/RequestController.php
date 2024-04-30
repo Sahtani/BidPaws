@@ -10,19 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class RequestController extends Controller
 {
-     /**
+    /**
      * Store a newly created adoption request in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         $adoptionRequest = ModelsRequest::create([
             'annonce_id' => $request->annonce_id,
             'user_id' => Auth::id(),
             'status' => 'pending',
         ]);
         return redirect()->route('home');
-}
+    }
 }
