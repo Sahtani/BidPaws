@@ -11,10 +11,10 @@
     <div class="w-full my-20  border flex flex-col gap-6 ">
         <div class="flex items-center justify-center ">
             <div class="w-4/5 grid md:grid-cols-3 grid-cols-1  gap-10">
-                <div class="col-start-1 col-end-3 bg-white rounded-lg shadow-2xl">
+                <div class="col-start-1 col-end-3 bg-white h-fit rounded-lg shadow-2xl">
                     <div class="swiper-slide">
                         <img src="{{ asset('storage/annonceImages/' . $annonce->images[0]->image_path) }}" alt="Image"
-                            class="rounded p-6" id="main-image">
+                            class="rounded p-6 h-3/5 w-full" id="main-image">
                         <div class="flex items-center justify-center">
                             <div class="grid grid-cols-3 left-26 bottom-4">
                                 @foreach ($annonce->images as $index => $image)
@@ -26,8 +26,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-2xl w-full">
-                    <div class="flex items-center justify-center mt-6 ">
+                <div class="bg-white rounded-lg shadow-2xl w-full ">
+                    <div class="flex items-center justify-center mt-6 h-fit">
                         <a href="#" class="flex-shrink-0 rounded-full overflow-hidden">
                             <div class=" bg-gray-100 inset-0 flex items-center justify-center text-gray-400">
                                 <svg class="w-16 h-16 p-2" viewBox="0 0 132 148" fill="none"

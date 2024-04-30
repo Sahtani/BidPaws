@@ -69,7 +69,7 @@
                                                             stroke-linejoin="round"></path>
                                                     </g>
                                                 </svg>
-                                                <span class=" w-1/6 text-950"> {{ $annonce->location }}</span>
+                                                <span class="text-950"> {{ $annonce->location }}</span>
                                             </div>
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 mr-1">

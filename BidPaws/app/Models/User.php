@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\Annonce;
 use App\Models\Conversation;
 use App\Models\Favorite;
+use App\Models\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,6 +55,10 @@ class User extends Authenticatable
     public function annonces()
     {
         return $this->hasMany(Annonce::class);
+    }
+
+    public function requests(){
+        $this->hasMany(Request::class);
     }
 
     public function isAdmin()
