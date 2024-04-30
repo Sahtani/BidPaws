@@ -10,10 +10,12 @@ use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
 use Illuminate\Support\Facades\Route;
 use Pusher\Pusher;
+
 
 
 
@@ -60,8 +62,8 @@ Route::get('/unauthorized', function () {
 
 // Message
 Route::get('/chat', [ConversationController::class, 'index'])->name('chat');
-Route::post('/ReadMessages', [MessageController::class , 'readMessages']);
-Route::post('/messages/send', [MessageController::class ,'store']);
+Route::post('/ReadMessages', [MessageController::class, 'readMessages']);
+Route::post('/messages/send', [MessageController::class, 'store']);
 Route::get('/user/conversations', [ConversationController::class, 'getUserConversations'])->name('user.conversations');
 
 
@@ -87,11 +89,14 @@ Route::middleware(['auth', 'user'])->group(function () {
         Route::patch('user/annonces/update/{id}', [AnnonceController::class, 'update'])->name('update');
         Route::delete('annonces/{id}', [AnnonceController::class, 'destroy'])->name('delete');
         Route::post('/addToFavorites/{id}', [FavoriteController::class, 'addToFavorites'])->name('addToFavorites');
- 
+
 
         Route::get('/my-listings', [AnnonceController::class, 'myListings'])->name('my-listings');
 
         Route::put('/annonces/{annonce}', [AnnonceController::class, 'confirm']);
+
+        // Request 
+        Route::post('/adoption-requests/{id}', [RequestController::class, 'store'])->name('requests.store');
     });
 });
 
@@ -107,14 +112,12 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/storecat', [CategoryController::class, 'store'])->name('storecat');
         Route::delete('/destroycat/{id}', [CategoryController::class, 'destroy'])->name('destroycat');
         Route::put('/update', [CategoryController::class, 'update'])->name('update');
-        
-        Route::get('/annonces',[AdminController::class,'annonces'])->name('annonces');
-        Route::patch('/validateAnnonce/{annonce}',[AdminController::class,'acceptAnnoces'])->name('validateAnnonce');
-        Route::patch('/rejectAnnoces/{annonce}',[AdminController::class,'rejectAnnoces'])->name('rejectAnnoces');
+
+        Route::get('/annonces', [AdminController::class, 'annonces'])->name('annonces');
+        Route::patch('/validateAnnonce/{annonce}', [AdminController::class, 'acceptAnnoces'])->name('validateAnnonce');
+        Route::patch('/rejectAnnoces/{annonce}', [AdminController::class, 'rejectAnnoces'])->name('rejectAnnoces');
         // stats
         Route::get('/stats', [AdminController::class, 'stats'])->name('stats');
-
-   
     });
 });
 

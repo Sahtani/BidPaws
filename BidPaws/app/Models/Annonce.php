@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Annonce extends Model
 {
@@ -51,4 +52,15 @@ class Annonce extends Model
     {
         return $this->favorites()->where('user_id', auth()->id())->exists();
     }
+    
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
+
+    public function isAppliedByUser()
+    {
+        return $this->requests()->where('user_id', Auth::id())->exists();
+    }
+
 }

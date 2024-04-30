@@ -229,19 +229,27 @@
                                     <div class="text-blue-900  font-bold mr-4 ">{{ $annonce->views }} Views</div>
                                 </div>
                                 @auth
-                                    <a href=""
-                                        class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white  font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" style="fill: rgb(254, 254, 254);transform: ;msFilter:;">
-                                            <path
-                                                d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z">
-                                            </path>
-                                            <path
-                                                d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
-                                            </path>
-                                        </svg>
-                                        <span> Apply to Adopt </span>
-                                    </a>
+                                <form action="{{ route('user.requests.store', $annonce->id) }}" method="POST" class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+                                    @csrf
+                                    @if($annonce->isAppliedByUser())
+                                        <button type="button" class="flex gap-2 text-green-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
+                                                <path d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z"></path>
+                                                <path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path>
+                                            </svg>
+                                            <span>Applied</span>
+                                        </button>
+                                    @else
+                                        <button type="submit" class="flex gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
+                                                <path d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z"></path>
+                                                <path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path>
+                                            </svg>
+                                            <span>Apply to Adopt</span>
+                                        </button>
+                                    @endif
+                                </form>
+                                
                                 @endauth
                                 @guest
                                     <a href="{{ route('log-in') }}"
