@@ -74,10 +74,11 @@
             </ul>
         </div>
         <div class="p-6 rounded-xl lg:col-span-2">
-            <form>
+            <form action="{{ route('contact.send') }}" method="post">
+                @csrf
                 <div class="grid sm:grid-cols-2 gap-8">
                     <div class="relative flex items-center">
-                        <input type="text" placeholder="First Name"
+                        <input type="text" placeholder="First Name" name="first_name"
                             class="px-2 py-3 bg-white w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" />
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2"
                             viewBox="0 0 24 24">
@@ -88,7 +89,7 @@
                         </svg>
                     </div>
                     <div class="relative flex items-center">
-                        <input type="text" placeholder="Last Name"
+                        <input type="text" placeholder="Last Name" name="last_name"
                             class="px-2 py-3 bg-white w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" />
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2"
                             viewBox="0 0 24 24">
@@ -99,7 +100,7 @@
                         </svg>
                     </div>
                     <div class="relative flex items-center">
-                        <input type="number" placeholder="Phone No."
+                        <input type="number" placeholder="Phone No." name="phone"
                             class="px-2 py-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" />
                         <svg fill="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 64 64">
                             <path
@@ -108,7 +109,7 @@
                         </svg>
                     </div>
                     <div class="relative flex items-center">
-                        <input type="email" placeholder="Email"
+                        <input type="email" placeholder="Email" name="email"
                             class="px-2 py-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none" />
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2"
                             viewBox="0 0 682.667 682.667">
@@ -128,7 +129,7 @@
                         </svg>
                     </div>
                     <div class="relative flex items-center sm:col-span-2">
-                        <textarea placeholder="Write Message"
+                        <textarea placeholder="Write Message" name="message"
                             class="px-2 pt-3 bg-white text-black w-full text-sm border-b-2 focus:border-[#011c2b] outline-none"></textarea>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2"
                             viewBox="0 0 682.667 682.667">
@@ -148,7 +149,7 @@
                         </svg>
                     </div>
                 </div>
-                <button type="button"
+                <button type="submit"
                     class="mt-12 flex items-center justify-center text-sm lg:ml-auto max-lg:w-full rounded px-4 py-2.5 font-semibold bg-950 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='#fff' class="mr-2" viewBox="0 0 548.244 548.244">
                         <path fill-rule="evenodd" d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z" clip-rule="evenodd" data-original="#000000" />

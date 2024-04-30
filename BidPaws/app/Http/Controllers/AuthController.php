@@ -40,16 +40,21 @@ class AuthController extends Controller
             'email' => 'required|email|',
             'password' => 'required|string|min:8'
         ]);
+
         $user = User::where('email', $fields['email'])->first();
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return redirect()->back()->withErrors(['email' => 'Incorrect credentials.'])->withInput();
         }
-        Auth::login($user);
-        if ($user->isAdmin()) {
-                redirect()->route('admin.stats')->with('success', 'Welcome back!');
-        }
 
-        return redirect()->route('user.profile')->with('sucsess', 'welckom back ');
+        Auth::login($user);
+
+        if ($user->isAdmin()) {
+            redirect()->route('admin.stats')->with('success', 'Welcome back!');
+        } elseif ($user->isUser()) {
+            redirect()->route('user.profile')->with('sucsess', 'welckom back ');
+        }
+        
+        return  redirect()->route('home');
     }
 
     public function logout()

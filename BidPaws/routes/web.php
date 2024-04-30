@@ -5,6 +5,7 @@ use App\Http\Controllers\AnnonceController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
 use Illuminate\Support\Facades\Route;
 use Pusher\Pusher;
+
 
 
 
@@ -44,6 +46,9 @@ Route::get('/contact-us', function () {
 Route::get('/about-us', function () {
     return view('about-us');
 })->name('about-us');
+Route::get('/unauthorized', function () {
+    return view('errors.unauthorized');
+})->name('unauthorized');
 
 // Route::get('/chat', function () {
 //     return view('chat');
@@ -94,7 +99,7 @@ Route::get('annonces/show/{id}', [AnnonceController::class, 'show'])->name('show
 Route::post('/annonces/search', [AnnonceController::class, 'search'])->name('annonces.search');
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
         Route::get('/admindashboard', [AdminController::class, 'users'])->name('users');
@@ -113,6 +118,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
+
+Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');
 // Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
 
 Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('annonces.category');

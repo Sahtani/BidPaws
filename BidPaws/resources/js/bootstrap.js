@@ -22,15 +22,11 @@ window.Pusher = Pusher;
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '80a77cddf1289bda7aca',
-    app_id: "1795252",
-    secret: "a3e3b2a5fdfd9a62020c",
-    wsHost: 'ws.pusher.com', 
-    wsPort: 443,
-    disableStats: true,
-    logToConsole: true,
-    cluster: 'mt1',
-    wssPort: 443,
-    forceTLS: 'https',
+    cluster:'mt1',
+    wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+    wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+    wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+    forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
 

@@ -11,7 +11,7 @@
             <p class="text-lg mb-8">Experience excellence like never before with our exclusive products and services.</p>
 
 
-            <form action="{{ route('user/update',$annonce->id) }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+            <form action="{{ route('user.update',$annonce->id) }}" method="POST" enctype="multipart/form-data" class="mx-auto">
                 @method('PATCH')
                 @csrf
                 <div class="grid grid-cols-3 gap-6">
