@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class RequestController extends Controller
 {
+
+
+    public function index()
+{
+    $user = Auth::user();
+    $applications = $user->applications()->paginate(10); 
+    return view('user.applications', ['applications' => $applications]);
+}
     /**
      * Store a newly created adoption request in storage.
      *

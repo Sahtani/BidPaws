@@ -288,22 +288,6 @@
     </div>
 </div>
 </div>
-{{-- <script>
-    // Attend que le document soit prêt
-    document.addEventListener("DOMContentLoaded", function() {
-        // Sélectionne l'élément que vous voulez animer
-        const title = document.querySelector('.title');
-
-        // Anime l'élément avec une animation qui le fait venir d'en haut
-        anime({
-            targets: title,
-            translateY: ['-200px', '0px'],
-            opacity: [0, 1],
-            duration: 1000,
-            easing: 'easeInOutQuad' // Optionnel : changement d'animation
-        });
-    });
-</script> --}}
 <script>
     // Attend que le document soit prêt
     document.addEventListener("DOMContentLoaded", function() {
@@ -319,31 +303,7 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        $('#searchForm').submit(function(event) {
-            event.preventDefault();
 
-            var formData = $(this).serialize();
-
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                success: function(response) {
-                    $('#searchResults').html(response);
-                    $('#announcementGrid').hide();
-                    $('#title').hide();
-
-                    $('#searchResults').html(response).show();
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
-    });
-</script>
 
 {{-- <script>
     document.addEventListener('DOMContentLoaded', function() {

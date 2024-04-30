@@ -97,6 +97,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
         // Request 
         Route::post('/adoption-requests/{id}', [RequestController::class, 'store'])->name('requests.store');
+        Route::post('/applications', [RequestController::class, 'index'])->name('applications');
     });
 });
 
