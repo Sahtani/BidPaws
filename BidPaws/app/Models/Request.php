@@ -19,10 +19,10 @@ class Request extends Model
 
 
     public function user(){
-        $this->belongsTo(User::class);
+       return $this->belongsTo(User::class);
     }
 
     public function annonce(){
-        $this->belongsTo(Annonce::class);
+      return  $this->belongsTo(Annonce::class);
     }
 }

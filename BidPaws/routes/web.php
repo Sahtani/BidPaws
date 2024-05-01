@@ -76,7 +76,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth', 'user'])->group(function () {
+Route::middleware(['user'])->group(function () {
     Route::prefix('user')->name('user.')->group(function () {
         // profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -97,7 +97,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
         // Request 
         Route::post('/adoption-requests/{id}', [RequestController::class, 'store'])->name('requests.store');
-        Route::post('/applications', [RequestController::class, 'index'])->name('applications');
+        Route::get('/applications', [RequestController::class, 'index'])->name('applications');
+        Route::patch('/validateRequest/{request}', [RequestController::class, 'acceptRequest'])->name('validaterequest');
     });
 });
 

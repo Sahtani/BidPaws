@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Annonce;
 use App\Models\Request as ModelsRequest;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -13,11 +14,15 @@ class RequestController extends Controller
 
 
     public function index()
-{
-    $user = Auth::user();
-    $applications = $user->applications()->paginate(10); 
-    return view('user.applications', ['applications' => $applications]);
-}
+    {
+        $user = Auth::user();
+
+        $annonces = Annonce::where('user_id', $user->id)->with('requests')->get();
+        $applications = ModelsRequest::where('user_id', $user->id)->with('user')->get();
+        // dd($applications);
+        return view('user.applications', compact('annonces', 'applications'));
+    }
+    
     /**
      * Store a newly created adoption request in storage.
      *
@@ -32,5 +37,12 @@ class RequestController extends Controller
             'status' => 'pending',
         ]);
         return redirect()->route('home');
+    }
+
+    public function acceptRequest(ModelsRequest $request)
+    {
+        $request->status = 'approved';
+        $request->save();
+        return back()->with('success', 'Request accepted successfully.');
     }
 }
