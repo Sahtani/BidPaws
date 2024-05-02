@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-col items-center justify-center w-full">
         <div class="flex items-center justify-center bg-white border border-white mt-10 w-9/12 rounded-lg">
-            <form action="{{ route('annonces.search') }}" method="POST" class="w-full">
+            <form id="searchForm" action="{{ route('annonces.search') }}" method="POST" class="w-full">
                 @csrf
                 <div class="grid grid-cols-4 gap-6 px-6 py-6 w-full shadow-xl">
                     <div class="card">
@@ -50,7 +50,7 @@
             </form>
         </div>
 
-        <div class="grid grid-cols-4 gap-4 border border-none  mt-10 w-9/12  rounded-lg ">
+        <div id="announcementGrid" class="grid grid-cols-4 gap-4 border border-none  mt-10 w-9/12  rounded-lg ">
             @foreach ($annonces as $annonce)
                 <div class=" w-full border border-white rounded-lg bg-white md:mr-2 sm:px-4 shadow-xl">
                     <div class="p-2">
@@ -214,6 +214,6 @@
             </a>
         @endforeach
     </div>
-    <div id="searchResults" class="hidden"></div>
+    <div id="searchResults" class="hidden w-9/12"></div>
 </div>
 @endsection
