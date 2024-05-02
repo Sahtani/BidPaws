@@ -16,7 +16,9 @@ class AuthController extends Controller
         return view('auth.signup-form');
     }
     public function showloginForm()
-    {
+    {  if (Auth::check()) {
+        return redirect()->back(); 
+    }
         return view('auth.login-form');
     }
     public function register(AuthRequest $request)

@@ -17,9 +17,7 @@ class User
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            // Vérifier le rôle de l'utilisateur
             if ($request->user()->role === 'user') {
-                // L'utilisateur est un utilisateur normal, laissez-le passer
                 return $next($request);
             } elseif ($request->user()->role === 'admin') {
                 // L'utilisateur est un administrateur, redirigez-le vers la page d'administration
