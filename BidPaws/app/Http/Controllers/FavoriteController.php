@@ -15,9 +15,8 @@ class FavoriteController extends Controller
     {
         $user = auth()->user();
 
-        $favorites = $user->favorites;
-
-        return view('favorites.index', ['favorites' => $favorites]);
+        $favorites =Favorite::where('user_id', $user->id)->with('user', 'annonce')->get();
+        return view('user.user-favoris', ['favorites' => $favorites]);
     }
     public function addToFavorites(Request $request, $id)
     {
@@ -29,7 +28,6 @@ class FavoriteController extends Controller
         $isFavorite = $user->favorites()->where('annonce_id', $id)->exists();
 
         if ($isFavorite) {
-            // Supprimer l'annonce des favoris de l'utilisateur
             $user->favorites()->where('annonce_id', $annonce->id)->delete();
             
             // Redirection avec un message

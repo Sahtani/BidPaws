@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg flex  justify-center ">
                 <div class="max-w-xl gap-10 ">
                     <div class="flex items-center justify-center">
-                        <img src="{{ asset('storage/usersImages/' . $user->image) }}" width="110"
+                        <img src="{{ asset('storage/usersImages/' . $user->image) }}" width="140"
                         class="rounded-full h-32 border-2 border-secondary" alt="User Image">
 
                     </div>

@@ -155,7 +155,7 @@
                 <table class="w-full">
                     <thead>
                         <tr
-                            class="bg-slate-200  border text-left text-xs font-semibold uppercase tracking-widest text-gray-700">
+                            class="bg-950  border text-left text-xs font-semibold uppercase tracking-widest text-white">
                             <th class="px-5 py-3 ">Title</th>
                             <th class="px-5 py-3">Location</th>
                             <th class="px-5 py-3">Category</th>
@@ -172,7 +172,7 @@
                                             <div class="flex items-center">
                                                 <div class="h-10 w-10 flex-shrink-0">
                                                     <img src="{{ asset('storage/annonceImages/' . $image->image_path) }}"
-                                                        alt="" />
+                                                        alt=""/>
                                                 </div>
                                                 <div class="ml-3">
                                                     <p class="whitespace-no-wrap">{{ $annonce->title }}</p>

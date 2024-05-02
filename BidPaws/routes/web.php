@@ -68,8 +68,6 @@ Route::get('/user/conversations', [ConversationController::class, 'getUserConver
 
 
 
-
-
 Route::get('/sign-up', [AuthController::class, 'showRegistrationForm'])->name('sign-up');
 Route::get('/log-in', [AuthController::class, 'showLoginForm'])->name('log-in');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -99,6 +97,10 @@ Route::middleware(['user'])->group(function () {
         Route::post('/adoption-requests/{id}', [RequestController::class, 'store'])->name('requests.store');
         Route::get('/applications', [RequestController::class, 'index'])->name('applications');
         Route::patch('/validateRequest/{request}', [RequestController::class, 'acceptRequest'])->name('validaterequest');
+
+        // favoris
+        Route::get('/Favoris', [FavoriteController::class, 'displayFavorites'])->name('favoris');
+
     });
 });
 

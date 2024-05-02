@@ -23,7 +23,14 @@ class AnnonceController extends Controller
     public function index()
     {
         $annonces = Annonce::with(['images', 'category'])->paginate(6);
-        return view('allannonces', compact('annonces'));
+        $categories=Category::all();
+        $villesJsonPath = storage_path('villes_maroc.json');
+        if (File::exists($villesJsonPath)) {
+            $villes = json_decode(File::get($villesJsonPath));
+        } else {
+            $villes = [];
+        }
+        return view('allannonces', compact('annonces','categories','villes'));
     }
 
     public function recentAnnouncements()
