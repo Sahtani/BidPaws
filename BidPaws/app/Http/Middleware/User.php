@@ -20,11 +20,9 @@ class User
             if ($request->user()->role === 'user') {
                 return $next($request);
             } elseif ($request->user()->role === 'admin') {
-                // L'utilisateur est un administrateur, redirigez-le vers la page d'administration
-                return redirect()->route('admin.categories');
+                return redirect()->route('admin.stats');
             }
         }
     
-        // Si l'utilisateur n'est pas authentifié ou n'a pas le bon rôle, afficher une erreur d'autorisation
         return redirect()->route('unauthorized');
 }}

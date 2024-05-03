@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-2 h-screen ">
-        <div class="flex items-center justify-center ">
+        <div class="hidden md:flex items-center justify-center">
             <img src="{{ asset('image/Mobile login-pana.svg') }}" alt="register-image" class="w-3/4">
         </div>
         <div class="flex items-center justify-center">
@@ -78,7 +78,7 @@
                                     value="{{ old('phone_number') }}" placeholder="0623456789">
                             </div>
                             <x-input-error :messages="$errors->get('number_phone')" class="my-2" />
-                            <button type="submit" class="block w-full bg-950 mt-4 py-2  text-white font-semibold mb-2">Sign
+                            <button type="submit" class="block w-full bg-950 mt-4 py-2 rounded-full  text-white font-semibold mb-2">Sign
                                 Up</button>
 
                         </form>

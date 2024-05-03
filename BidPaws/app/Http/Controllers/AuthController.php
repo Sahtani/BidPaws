@@ -16,10 +16,14 @@ class AuthController extends Controller
         return view('auth.signup-form');
     }
     public function showloginForm()
-    {  if (Auth::check()) {
-        return redirect()->back(); 
-    }
-        return view('auth.login-form');
+    {  
+    //     if (Auth::check()) {
+    //     return redirect()->back(); 
+    // }else{
+    //    
+    // }
+    return view('auth.login-form');
+        
     }
     public function register(AuthRequest $request)
     {
@@ -50,10 +54,12 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        if ($user->isAdmin()) {
-            redirect()->route('admin.stats')->with('success', 'Welcome back!');
+        if ($user->role=='admin') {
+           return redirect()->route('admin.stats');
+           
         } elseif ($user->isUser()) {
-            redirect()->route('user.profile')->with('sucsess', 'welckom back ');
+            return redirect()->route('user.profile')   ;
+           
         }
         
         return  redirect()->route('home');

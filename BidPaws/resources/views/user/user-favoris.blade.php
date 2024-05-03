@@ -5,16 +5,9 @@
         <h1 class="text-2xl font-bold text-950">Your Favorites</h1>
     </div>
     <div class="favorites-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        <!-- 
-            card starts here
-         -->
          @foreach ($favorites as $favorite )
         <div class="animal-card w-full">
             <div class="animal-card-wrapper relative flex flex-col gap-2">
-                <!-- 
-                    user profile that made the announce
-                    clickable it points to the user's profile
-                -->
                 <a href="#" class="animal-announcer absolute top-2 left-2 flex items-start justify-center gap-1 bg-black/50 backdrop-blur-md text-white p-1 rounded-full cursor-pointer">
                     <div class="user-image">
                         <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,10 +17,6 @@
                     </div>
                     <p class="text-xs font-medium pr-1 capitalize">{{ $favorite->user->name }}</p>
                 </a>
-                <!-- 
-                    announce image 
-                    clickable it points to the announce details page
-                 -->
                  @foreach ($favorite->annonce->images as $key => $image)
                  @if ($key == 0)
                      <a href="{{ route('show', $favorite->annonce->id) }}">
@@ -36,19 +25,12 @@
                      </a>
                  @endif
              @endforeach
-                <!-- 
-                    animals details
-                 -->
                 <div class="animal-details flex items-start justify-between">
                     <div class="animal-name flex flex-col items-start gap-1">
                         <h2 class="text-lg font-semibold capitalize">{{ $favorite->annonce->title }}</h2>
                         <p class="animal-category text-sm font-medium text-gray-600 capitalize">{{ $favorite->annonce->category->name }}</p>
                     </div>
                     <div class="animal-price flex flex-col items-end gap-1">
-                        <!-- 
-                            button to undo the favorite 
-                            you can make it an href also
-                         -->
                         <button class="favorite-button cursor-pointer">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.22194 5.364C5.23353 4.35275 6.57301 3.73602 7.99905 3.62492C9.42509 3.51381 10.8439 3.91564 11.9999 4.758C13.2212 3.87442 14.7302 3.48272 16.227 3.66073C17.7238 3.83875 19.0988 4.57345 20.0788 5.71881C21.0587 6.86417 21.5718 8.33632 21.5161 9.84265C21.4603 11.349 20.8398 12.7792 19.7779 13.849L14.1209 19.506C13.5584 20.0684 12.7954 20.3844 11.9999 20.3844C11.2044 20.3844 10.4415 20.0684 9.87894 19.506L4.22194 13.85C3.09681 12.7248 2.46472 11.1987 2.46472 9.6075C2.46472 8.01627 3.09681 6.48921 4.22194 5.364Z" fill="#FF0000"/>
@@ -61,7 +43,6 @@
                 </div>
             </div>
         </div>
-        <!-- card ends here -->
         @endforeach
     </div>
 </div>

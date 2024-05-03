@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center w-full">
-        <div class="flex items-center justify-center bg-white border border-white mt-10 w-9/12 rounded-lg">
+        <div class="flex items-center justify-center bg-white border border-white mt-10  mx-6  md:w-9/12 rounded-lg">
             <form id="searchForm" action="{{ route('annonces.search') }}" method="POST" class="w-full">
                 @csrf
-                <div class="grid grid-cols-4 gap-6 px-6 py-6 w-full shadow-xl">
+                <div class="grid md:grid-cols-4 grid-cols-1 gap-6 px-6 py-6 md:w-full shadow-xl">
                     <div class="card">
                         <div class="flex flex-col">
                             <h3 class="font-semibold text-indigo-900">Species</h3>
                             <select name="search_category"
-                            class="px-4 py-3 ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
+                            class="px-4 py-3 md:ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
                             <option class="pl-3 pr-6 py-2 text-gray-700" disabled selected> Categories
                                 </option>
                                 @foreach ($categories as $category)
@@ -23,7 +23,7 @@
                         <div class="flex flex-col">
                             <h3 class="font-semibold text-indigo-900">City</h3>
                             <select name="search_location" id="ville"
-                            class="px-4 py-3 ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
+                            class="px-4 py-3 md:ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
                             <option disabled selected value="">Select a city</option>
                                                                                       @foreach ($villes as $ville)
                                 <option value="{{ $ville }}">{{ $ville }}</option>
@@ -35,7 +35,7 @@
                         <div class="flex flex-col">
                             <h3 class="font-semibold text-indigo-900">Title</h3>
                             <input type="text" name="title" placeholder="Enter title"
-                                class="px-4 py-3 ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
+                                class="px-4 py-3 md:ml-3 mt-4 w-full block appearance-none bg-slate-100 border-none px-4 py-2 pr-8 rounded-full leading-tight focus:outline-none">
                         </div>
                     </div>
                     <div class="card">
@@ -50,10 +50,10 @@
             </form>
         </div>
 
-        <div id="announcementGrid" class="grid grid-cols-4 gap-4 border border-none  mt-10 w-9/12  rounded-lg ">
+        <div id="announcementGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 border border-none mt-10 w-full md:w-9/12 rounded-lg">
             @foreach ($annonces as $annonce)
-                <div class=" w-full border border-white rounded-lg bg-white md:mr-2 sm:px-4 shadow-xl">
-                    <div class="p-2">
+                <div class=" md:w-full border border-white rounded-lg bg-white md:mr-2  shadow-xl mx-4">
+                    <div class="p-2  ">
                         @foreach ($annonce->images as $key => $image)
                             @if ($key == 0)
                                 <a href = "{{ route('show', $annonce->id) }}" class="swiper-slide relative">
@@ -214,6 +214,6 @@
             </a>
         @endforeach
     </div>
-    <div id="searchResults" class="hidden w-9/12"></div>
+    <div id="searchResults" class="hidden  md:w-9/12"></div>
 </div>
 @endsection

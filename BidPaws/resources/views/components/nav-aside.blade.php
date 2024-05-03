@@ -102,7 +102,7 @@
             <ul class="space-y-2 font-medium">
                 <li class="min-w-max pt-4">
                     <div class="border shadow rounded-lg border-white bg-yellow-50 ">
-                        <a href="#"
+                        <a href="{{ route('home') }}"
                             class="bg group flex items-center space-x-4 rounded-lg px-4 py-3 text-gray-600 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="40" viewBox="0 0 24 24"
                                 class="fill-or" ">

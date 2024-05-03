@@ -18,6 +18,7 @@ class Admin
     {
         if (Auth::check()) {
             if ($request->user()->role === 'admin') {
+
                 return $next($request);
             } elseif ($request->user()->role === 'user') {
                 return redirect()->route('user.create');
@@ -25,4 +26,5 @@ class Admin
         }
         return redirect()->route('unauthorized');
     }
+    
 }
