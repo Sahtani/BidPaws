@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class=" mx-20 px-4 py-8 sm:px-6">
-        @if ($applications->isEmpty())
+    <div class=" mx-20 px-4 py-8 sm:px-6 min-h-screen">
+        @if ($requests->isEmpty())
             <div class="bg-white w-full mb-10 rounded rounded-lg">
                 <div class="flex items-center justify-between">
 
@@ -58,28 +58,28 @@
                         </thead>
                         <tbody class="text-gray-500">
                             <tr>
-                                @foreach ($applications as $application)
+                                @foreach ($requests as $request)
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 flex-shrink-0 ">
-                                                <img src="{{ asset('storage/usersImages/' . $application->user->image) }}"
+                                                <img src="{{ asset('storage/usersImages/' . $request->image) }}"
                                                     class="rounded-full" alt="">
                                             </div>
                                             <div class="ml-3">
-                                                <p class="whitespace-no-wrap">{{ $application->user->name }}</p>
+                                                <p class="whitespace-no-wrap">{{ $request->name }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                        <p class="whitespace-no-wrap">{{ $application->user->role }}</p>
+                                        <p class="whitespace-no-wrap">{{ $request->role && $request->id }}</p>
                                     </td>
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                        <p class="whitespace-no-wrap">{{ $application->user->created_at->format('M d, Y') }}
+                                        <p class="whitespace-no-wrap">{{ $request->created_at}}
                                         </p>
 
                                     </td>
                                     <td class="border-b border-gray-200 bg-white px- py-5 text-sm">
-                                        @if ($application->status === 'pending')
+                                        @if ($request->status === 'pending')
                                             <span
                                                 class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Pending</span>
                                         @else
@@ -89,10 +89,10 @@
 
                                     </td>
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                                        <form method="POST" action="{{ route('user.validaterequest',$application->id) }}">
+                                        <form method="POST" action="{{ route('user.validaterequest',$request->id) }}">
                                             @method('PATCH')
                                             @csrf
-                                            @if ($application->status === 'pending')
+                                            @if ($request->status === 'pending')
                                                 <button type="submit"
                                                     class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Accept</button>
                                             @else
@@ -108,7 +108,7 @@
         </table>
     </div>
     </div>
-    <div class=" mx-20 px-4">
+    {{-- <div class=" mx-20 px-4">
     @if ($annonces->isEmpty())
         <div class="bg-white w-full mb-10 rounded rounded-lg">
             <div class="flex items-center justify-between">
@@ -197,7 +197,7 @@
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm text-gray-500">
                                         @if ($request->status === 'approved')
                                             <div
-                                                class="inline-flex items-center rounded-full font-semibold bg-slate-300 py-2 px-3 text-xs text-gray-800">
+                                                class="inline-flex items-center rounded-full font-semibold bg-red-300 py-2 px-3 text-xs text-gray-800">
                                                 Accepted
                                             </div>
                                         @elseif ($request->status === 'rejected')
@@ -205,7 +205,7 @@
                                                 class="inline-flex items-center rounded-full font-semibold bg-red-300 py-2 px-3 text-xs text-gray-800">
                                                 Rejected
                                             </div>
-                                        @elseif ($request->status === 'pending')
+                                        @else 
                                             <div
                                                 class="inline-flex items-center rounded-full font-semibold bg-blue-200 py-2 px-3 text-xs text-gray-800">
                                                 Pending
@@ -215,7 +215,7 @@
                                 @endforeach
                         </tr>
     @endforeach
-    @endif
+    @endif --}}
     </tbody>
     </table>
     </div>

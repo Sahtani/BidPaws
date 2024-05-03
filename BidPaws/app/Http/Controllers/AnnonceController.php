@@ -22,7 +22,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        $annonces = Annonce::with(['images', 'category'])->paginate(6);
+        $annonces = Annonce::where('status','confirmed')->with(['images', 'category'])->paginate(6);
         $categories=Category::all();
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
@@ -35,7 +35,7 @@ class AnnonceController extends Controller
 
     public function recentAnnouncements()
     {
-        $annonces = Annonce::with('images')->latest()->take(4)->get();
+        $annonces = Annonce::where('status','confirmed')->with('images')->latest()->take(4)->get();
         $categories=Category::all();
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
@@ -176,7 +176,6 @@ class AnnonceController extends Controller
             $villes = [];
         }
         $annonces = $annonces->get();
-        // return response()->json($results);
         return view('user.search',compact('annonces'));
     }
     // search by city

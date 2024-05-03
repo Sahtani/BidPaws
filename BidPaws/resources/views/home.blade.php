@@ -4,7 +4,7 @@
         <section class="containe h-fit md:h-screen mx-auto px-4 sm:px-6 lg:px-8  relative">
             @if (session('success'))
                 <div id="logoutPopup" class="w-1/3 pt-4" style="display: block;">
-                    <div class="flex items-center p-4 w-1/2 p-4 ml-12  text-xl text-white rounded-lg bg-blue-500 dark:bg-gray-800 dark:text-blue-400"
+                    <div class="flex items-center p-4 w-1/2 p-4 md:ml-12  text-xl text-white rounded-lg bg-blue-500 dark:bg-gray-800 dark:text-blue-400"
                         role="alert">
                         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 20">
@@ -17,6 +17,21 @@
                     </div>
                 </div>
             @endif
+            @if (session('error'))
+            <div id="logoutPopup" class="w-1/3 pt-4" style="display: block;">
+                <div class="flex items-center p-4 w-1/2 p-4 md:ml-12  text-xl text-white rounded-lg bg-blue-300 dark:bg-gray-800 dark:text-blue-400"
+                    role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <div>
+                        <span class="font-medium">{{ session('error') }}</span>
+                    </div>
+                </div>
+            </div>
+        @endif
             <div class="  grid grid_cols-1 md:grid-cols-2 md:gap-20 ">
                 <div class="flex flex-col">
                     <h1
@@ -127,7 +142,8 @@
                                                     <div
                                                         class="absolute top-30 left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
 
-                                                        {{ $annonce->category->name }}
+                                                        {{ $annonce->category ? $annonce->category->name : 'original' }}
+
                                                     </div>
                                                 </div>
 

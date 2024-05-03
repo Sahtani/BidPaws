@@ -39,7 +39,7 @@
                                                         <div
                                                             class="absolute md:top-30 flex justify-end right-4  md:left-26 bottom-4 rounded w-fit right-2 text-center bg-teal-600 text-white px-2">
 
-                                                            {{ $annonce->category->name }}
+                                                            {{ $annonce->category ? $annonce->category->name : 'original' }}
                                                         </div>
                                                     </div>
 

@@ -85,11 +85,11 @@
                                 </td>
                                 <td class="border-b border-gray-200 bg-white px- py-5 text-sm">
                                     @if ($user->access === 1)
-                                        <span
-                                            class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
+                                    <span
+                                    class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Inactive</span>
                                     @else
-                                        <span
-                                            class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Inactive</span>
+                                    <span
+                                            class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
                                     @endif
 
                                 </td>

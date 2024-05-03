@@ -28,7 +28,7 @@
                 <div class="animal-details flex items-start justify-between">
                     <div class="animal-name flex flex-col items-start gap-1">
                         <h2 class="text-lg font-semibold capitalize">{{ $favorite->annonce->title }}</h2>
-                        <p class="animal-category text-sm font-medium text-gray-600 capitalize">{{ $favorite->annonce->category->name }}</p>
+                        <p class="animal-category text-sm font-medium text-gray-600 capitalize">{{ $favorite->annonce->category ? $favorite->annonce->category->name : 'original' }}</p>
                     </div>
                     <div class="animal-price flex flex-col items-end gap-1">
                         <button class="favorite-button cursor-pointer">

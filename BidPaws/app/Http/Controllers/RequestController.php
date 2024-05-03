@@ -8,6 +8,7 @@ use App\Models\Request as ModelsRequest;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
 {
@@ -15,14 +16,27 @@ class RequestController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
+        // $user = auth()->id();
 
-        $annonces = Annonce::where('user_id', $user->id)->with('requests')->get();
-        $applications = ModelsRequest::where('user_id', $user->id)->with('user')->get();
-        // dd($applications);
-        return view('user.applications', compact('annonces', 'applications'));
-    }
+        // $annonces = ModelsRequest::where('user_id', $user)->with('annonce')->get();
+
+        // $applications = ModelsRequest::where('user_id', $user)->with('user')->get();
+        // les demande d'adoption pour les annonce de user 
+        $id = auth()->id();
+
+        $requests = DB::table('requests')
+        ->select('requests.status', 'send.name','send.role','send.image','send.id','send.created_at')
+        ->join('annonces', 'requests.annonce_id', '=', 'annonces.id')
+        ->join('users as send', 'requests.user_id', '=', 'send.id')
+        ->join('users as receiv', 'annonces.user_id', '=', 'receiv.id')
+        ->where('annonces.user_id',$id)
+        ->get();
     
+        
+
+        return view('user.applications', compact('requests'));
+    }
+
     /**
      * Store a newly created adoption request in storage.
      *

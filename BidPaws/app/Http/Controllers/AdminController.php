@@ -52,7 +52,9 @@ class AdminController extends Controller
 
     public function rejectAnnoces(Request $request, Annonce $annonce)
     {
-        $annonce->update($request->only('status'));
+        $annonce->status = 'refused';
+        $annonce->save();
+
         return back()->with('success', 'Annonce rejected successfully.');
     }
     
