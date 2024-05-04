@@ -77,34 +77,4 @@ class User extends Authenticatable
     }
 
 
-    public function conversations()
-    {
-        return $this->hasMany(Conversation::class,'user_id');
-    }
-
-
-    public function sentConversations()
-    {
-        return $this->hasMany(Conversation::class, 'user_id');
-    }
-
-
-    public function receivedConversations()
-    {
-        return $this->hasMany(Conversation::class, 'friend_id');
-    }
-
-
-    public function unreadMessagesCount()
-    {
-        
-        $conversations = $this->conversations()->withCount(['messages' => function ($query) {
-            $query->whereNull('read_at')->where('sender_id', '!=', $this->id);
-        }])->get();
-
-        $unreadMessagesCount = $conversations->sum('messages_count');
-
-        return $unreadMessagesCount;
-    }
-
 }

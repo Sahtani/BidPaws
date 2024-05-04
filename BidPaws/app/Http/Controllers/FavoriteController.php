@@ -30,7 +30,6 @@ class FavoriteController extends Controller
         if ($isFavorite) {
             $user->favorites()->where('annonce_id', $annonce->id)->delete();
             
-            // Redirection avec un message
             return redirect()->back()->with('success', 'The announcement has been removed from your favorites.');
         }
 

@@ -11,7 +11,6 @@ class ContactController extends Controller
 {
     public function sendEmail(Request $request)
     {
-        // Valider les données du formulaire
         $validatedData = $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
@@ -20,9 +19,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
     
-        // Envoyer l'e-mail
         Mail::to('soumia.sahtani@gmail.com')->send(new ContactMail($validatedData));
-        // Rediriger avec un message de succès
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès.');
     }
 }
