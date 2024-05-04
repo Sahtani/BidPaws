@@ -178,24 +178,5 @@ class AnnonceController extends Controller
         $annonces = $annonces->get();
         return view('user.search',compact('annonces'));
     }
-    // search by city
-
-
-    public function searchByVille(Request $request)
-    {
-        $ville = $request->input('ville');
-
-        $annonces = Annonce::where('location', 'like', '%' . $ville . '%')->get();
-
-        return view('home', ['annonces' => $annonces]);
-    }
-   // filtre by category   
-    public function filterByCategory($category_id)
-    {
-        
-        $annonces = Annonce::where('category_id', $category_id)->get();
-
-        
-        return view('home', ['annonces' => $annonces]);
-    }
+   
 }

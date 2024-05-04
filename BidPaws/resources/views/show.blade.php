@@ -1,20 +1,18 @@
 @extends('layouts.base')
 @section('content')
-
-
-<a href="{{ route('home') }}">
-    <div class="bg-white flex items-center m-6 w-fit  rounded rounded-full border border-yell">
-        <h1 class="w-fit px-6 py-2 text-yell font-bold">Back to home !</h1>
-    </div>
-</a>
+    <a href="{{ route('home') }}">
+        <div class="bg-white flex items-center m-6 w-fit  rounded rounded-full border border-yell">
+            <h1 class="w-fit px-6 py-2 text-yell font-bold">Back to home !</h1>
+        </div>
+    </a>
 
     <div class="w-full my-20  border flex flex-col gap-6 ">
         <div class="flex items-center justify-center ">
-            <div class="w-4/5 grid md:grid-cols-3 grid-cols-1  gap-10">
-                <div class="col-start-1 col-end-3 bg-white h-fit rounded-lg shadow-2xl">
+            <div class="md:w-4/5 grid md:grid-cols-3 grid-cols-1  gap-10">
+                <div class="col-start-1 col-end-3  bg-white h-fit rounded-lg shadow-2xl">
                     <div class="swiper-slide">
                         <img src="{{ asset('storage/annonceImages/' . $annonce->images[0]->image_path) }}" alt="Image"
-                            class="rounded p-6 h-3/5 w-full" id="main-image">
+                            class="rounded p-6 h-2/5 w-full" id="main-image">
                         <div class="flex items-center justify-center">
                             <div class="grid grid-cols-3 left-26 bottom-4">
                                 @foreach ($annonce->images as $index => $image)
@@ -43,16 +41,11 @@
                             <a href="#" class=" capitalize font-bold text-lg text-950">
                                 {{ $annonce->user->name }}
                             </a>
-                            <a href="#" class="text-blue-600">
-                                Voir toutes les annonces
-                            </a>
                         </div>
                     </div>
                     <div class="w-full bg-gray-100 mt-4">
                         <div class="flex flex-col justify-center pl-8">
-
-
-                            <a href="tel:0661930688"
+                            <a href="{{ $annonce->user->number_phone }}"
                                 class="flex flex-row items-center ml-6 gap-1 text-950 font-bold py-2 px-4 rounded">
                                 <svg class="w-4 h-5 mr-2 text-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 24">
                                     <path fill="#1e1b4b"
@@ -63,8 +56,8 @@
                             </a>
                             <a href="#" class="flex flex-row ml-6 gap-1 text-950 font-bold py-2 px-4 rounded">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ">
-                                <path fill="#1e1b4b"
-                                    d=" M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897
+                                    <path fill="#1e1b4b"
+                                        d=" M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897
                                     2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386
                                     5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z">
                                     </path>
@@ -85,25 +78,69 @@
                                     alt="whatsapp" class="w-6 h-6 mr-2">
                                 Chat via WhatsApp
                             </a>
-
                         </div>
+                        <div class="mt-6">
+                            <div class="flex justify-center">
 
-                        <div class="mt-6 flex justify-center">
-                            <a href=""
-                                class="flex items-center gap-2 px-7 py-2 bg-yell text-[#000231]  font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    style="fill: rgb(0, 2, 49);transform: ;msFilter:;">
-                                    <path
-                                        d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z">
-                                    </path>
-                                    <path
-                                        d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
-                                    </path>
-                                </svg>
-                                <span> Apply to Adopt </span>
-                            </a>
+
+                                @auth
+                                    @if ($annonce->isAppliedByUser())
+                                        <button type="button"
+                                            class=" flex items-center justify-center gap-2 px-7 py-2 bg-950 text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
+                                                <path
+                                                    d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z">
+                                                </path>
+                                            </svg>
+                                            <span>Applied</span>
+                                        </button>
+                                    @elseif($annonce->user_id === auth()->id())
+                                        <button type="button"
+                                            class=" flex items-center justify-center gap-2 px-12 py-2 bg-yell text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+                                            <span>Your annonce</span>
+                                        </button>
+                                    @else
+                                        <form id="adoptionForm" action="{{ route('user.requests.store', $annonce->id) }}"
+                                            method="POST"
+                                            class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+                                            @csrf
+
+                                            <input type="hidden" name="annonce_id" value="{{ $annonce->id }}">
+
+                                            <button id="applyButton" type="submit" class="flex gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" style="fill: currentColor;transform: ;msFilter:;">
+                                                    <path
+                                                        d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z">
+                                                    </path>
+                                                    <path
+                                                        d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
+                                                    </path>
+                                                </svg>
+                                                <span>Apply to Adopt</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                                @guest
+                                    <a href="{{ route('log-in') }}"
+                                        class="flex items-center justify-center gap-2 px-7 py-2 bg-yell text-white  font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-105 hover:bg-yell-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" style="fill: rgb(254, 254, 254);transform: ;msFilter:;">
+                                            <path
+                                                d="M4 18h2v4.081L11.101 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2z">
+                                            </path>
+                                            <path
+                                                d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
+                                            </path>
+                                        </svg>
+                                        <span> Apply to Adopt </span>
+                                    </a>
+                                @endguest
+                            </div>
                         </div>
-
                     </div>
                     <div class="flex items-center justify-center space-x-4 mt-6 gap-4 pb-4 ">
                         <a href="#" class="text-primary hover:text-primary-dark" title="Add to favorites">
@@ -116,7 +153,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="w-full m-auto flex items-center  ">

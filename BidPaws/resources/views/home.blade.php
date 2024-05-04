@@ -309,9 +309,7 @@
 </div>
 </div>
 <script>
-    // Attend que le document soit prêt
     document.addEventListener("DOMContentLoaded", function() {
-        // Sélectionne le bouton
         const button = document.getElementById('button');
 
         button.addEventListener('mouseenter', function() {
@@ -323,42 +321,4 @@
         });
     });
 </script>
-
-
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.favorite-btn').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); 
-
-
-                // Récupérer l'identifiant de l'annonce à partir de l'attribut data
-                var annonceId = this.getAttribute('data-id');
-             console.log();
-                fetch('/add-to-favorites/' + annonceId, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ annonce_id: annonceId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Gérer la réponse du serveur
-                    if (data.success) {
-                        // Afficher un message de succès ou effectuer d'autres actions
-                        alert('Annonce ajoutée aux favoris avec succès');
-                    } else {
-                        // Afficher un message d'erreur ou effectuer d'autres actions
-                        alert('Une erreur s\'est produite');
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur lors de l\'envoi de la requête:', error);
-                });
-            });
-        });
-    });
-</script> --}}
 @endsection

@@ -16,14 +16,11 @@ class RequestController extends Controller
 
     public function index()
     {
-        // $user = auth()->id();
-
-        // $annonces = ModelsRequest::where('user_id', $user)->with('annonce')->get();
-
-        // $applications = ModelsRequest::where('user_id', $user)->with('user')->get();
-        // les demande d'adoption pour les annonce de user 
         $id = auth()->id();
-
+        $annonces = ModelsRequest::where('user_id', $id)->with('annonce')->get();
+        // dd($annonces);
+        // les demande d'adoption pour les annonce de user 
+       
         $requests = DB::table('requests')
         ->select('requests.status', 'send.name','send.role','send.image','send.id','send.created_at')
         ->join('annonces', 'requests.annonce_id', '=', 'annonces.id')
@@ -34,7 +31,7 @@ class RequestController extends Controller
     
         
 
-        return view('user.applications', compact('requests'));
+        return view('user.applications', compact('requests','annonces'));
     }
 
     /**

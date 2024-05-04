@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Annonce;
 use App\Models\Category;
+use App\Models\Request as ModelsRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,24 +66,24 @@ class AdminController extends Controller
 
         $totalUsers = User::where('role','user')->count();
         $userBand = User::where('access','1')->count();
+        $usernotBand = User::where('access','0')->count();
 
         $totalAnnonces = Annonce::count();
-
         $categories=Category::count();
-
-        $annoncesByCategory = Annonce::select('category_id', DB::raw('count(*) as total'))->groupBy('category_id')->get();
-
-
-        $annoncesByUser = User::withCount('annonces')->orderByDesc('annonces_count')->get();
+        $approvedRequests=ModelsRequest::where('status','approved')->count();
+        $rejectedRequests=ModelsRequest::where('status', 'rejected')->count();
+        $pendingRequests=ModelsRequest::where('status', 'pending')->count();
 
         $stats = [
             'totalUsers' => $totalUsers,
             'totalAnnonces' => $totalAnnonces,
-            'annoncesByCategory' => $annoncesByCategory,
-            'annoncesByUser' => $annoncesByUser,
             'user'=>$user,
             'categories'=>$categories,
-            'userBand'=>$userBand
+            'userBand'=>$userBand,
+            'approvedRequests'=>$approvedRequests,
+            'rejectedRequests'=>$rejectedRequests,
+            'pendingRequests'=>$pendingRequests,
+            'usernotBand'=>$usernotBand
         ];
 
         // return $stats;

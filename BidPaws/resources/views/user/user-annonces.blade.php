@@ -20,7 +20,7 @@
                     </a>
                 </div>
                 @if ($annonces->isEmpty())
-                    <p class="text-xl text-950 font-bold">No annonces found.</p>
+                    <p class="text-xl text-950 font-bold mt-4">No annonces found.</p>
                 @else
                
                       

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class=" mx-20 px-4 py-8 sm:px-6 min-h-screen">
+    <div class=" mx-20 px-4 py-8 sm:px-6">
         @if ($requests->isEmpty())
             <div class="bg-white w-full mb-10 rounded rounded-lg">
                 <div class="flex items-center justify-between">
@@ -108,7 +108,7 @@
         </table>
     </div>
     </div>
-    {{-- <div class=" mx-20 px-4">
+    <div class=" mx-20 px-4">
     @if ($annonces->isEmpty())
         <div class="bg-white w-full mb-10 rounded rounded-lg">
             <div class="flex items-center justify-between">
@@ -166,7 +166,7 @@
                     <tbody class="text-gray-500">
                         <tr>
                             @foreach ($annonces as $annonce)
-                                @foreach ($annonce->images as $key => $image)
+                                @foreach ($annonce->annonce->images as $key => $image)
                                     @if ($key == 0)
                                         <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                                             <div class="flex items-center">
@@ -193,14 +193,13 @@
                                     <p class="whitespace-no-wrap">{{ $annonce->created_at->format('M d, Y') }}</p>
 
                                 </td>
-                                @foreach ($annonce->requests as $request)
                                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm text-gray-500">
-                                        @if ($request->status === 'approved')
+                                        @if ($annonce->status === 'approved')
                                             <div
                                                 class="inline-flex items-center rounded-full font-semibold bg-red-300 py-2 px-3 text-xs text-gray-800">
                                                 Accepted
                                             </div>
-                                        @elseif ($request->status === 'rejected')
+                                        @elseif ($annonce ->status === 'rejected')
                                             <div
                                                 class="inline-flex items-center rounded-full font-semibold bg-red-300 py-2 px-3 text-xs text-gray-800">
                                                 Rejected
@@ -212,10 +211,9 @@
                                             </div>
                                         @endif
                                     </td>
-                                @endforeach
                         </tr>
     @endforeach
-    @endif --}}
+    @endif
     </tbody>
     </table>
     </div>
