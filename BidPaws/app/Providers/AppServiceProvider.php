@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Implementations\CategoryRepository;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            CategoryRepositoryInterface::class,
+            CategoryRepository::class
+        );
     }
 
     /**

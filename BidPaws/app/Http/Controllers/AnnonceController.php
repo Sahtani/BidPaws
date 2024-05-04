@@ -2,28 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\File;
-
 use App\Http\Requests\AnnonceRequest;
+
 use App\Models\Annonce;
 use App\Models\AnnonceImage;
 use App\Models\Category;
 use App\Models\User;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use GuzzleHttp\Client; 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
-use GuzzleHttp\Client; 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class AnnonceController extends Controller
-{
+{   
+    protected $categoryRepository;
+
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $annonces = Annonce::where('status','confirmed')->with(['images', 'category'])->paginate(6);
-        $categories=Category::all();
+        $categories = $this->categoryRepository->getAllCategories();
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
             $villes = json_decode(File::get($villesJsonPath));
@@ -35,8 +43,8 @@ class AnnonceController extends Controller
 
     public function recentAnnouncements()
     {
-        $annonces = Annonce::where('status','confirmed')->with('images')->latest()->take(4)->get();
-        $categories=Category::all();
+        $annonces = Annonce::where('status','confirmed')->with('images')->latest()->take(6)->get();
+        $categories = $this->categoryRepository->getAllCategories();
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
             $villes = json_decode(File::get($villesJsonPath));
@@ -57,7 +65,7 @@ class AnnonceController extends Controller
         } else {
             $villes = [];
         }
-        $categories = Category::all();
+        $categories = $this->categoryRepository->getAllCategories();
         return view('user.create', compact('villes', 'categories'));
     }
 
@@ -104,7 +112,7 @@ class AnnonceController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::all();
+        $categories = $this->categoryRepository->getAllCategories();
         $annonce = Annonce::with('category', 'images')->findOrFail($id);
         return view('user.update', compact('annonce', 'categories'));
     }
@@ -168,7 +176,8 @@ class AnnonceController extends Controller
         if ($location) {
             $annonces->where('location', $location);
         }
-        $categories=Category::all();
+        
+        $categories = $this->categoryRepository->getAllCategories();
         $villesJsonPath = storage_path('villes_maroc.json');
         if (File::exists($villesJsonPath)) {
             $villes = json_decode(File::get($villesJsonPath));

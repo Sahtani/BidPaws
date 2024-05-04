@@ -97,6 +97,7 @@ Route::middleware(['user'])->group(function () {
         Route::post('/adoption-requests/{id}', [RequestController::class, 'store'])->name('requests.store');
         Route::get('/applications', [RequestController::class, 'index'])->name('applications');
         Route::patch('/validateRequest/{request}', [RequestController::class, 'acceptRequest'])->name('validaterequest');
+        Route::patch('/RejectRequest/{request}', [RequestController::class, 'rejectRequest'])->name('rejectRequest');
 
         // favoris
         Route::get('/Favoris', [FavoriteController::class, 'displayFavorites'])->name('favoris');
@@ -127,8 +128,6 @@ Route::middleware(['admin'])->group(function () {
 
 
 Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');
-// Route::get('/annonces/search', [AnnonceController::class, 'searchByVille'])->name('annonces.search');
-
 Route::get('/annonces/{category}', 'AnnonceController@filterByCategory')->name('annonces.category');
 
 

@@ -85,7 +85,6 @@ class AdminController extends Controller
             'pendingRequests'=>$pendingRequests,
             'usernotBand'=>$usernotBand
         ];
-
         // return $stats;
         return view('admin.stats', compact('stats'));
 

@@ -33,7 +33,7 @@ class AuthController extends Controller
             'username' => $fields['username'],
             'image' => $image[2],
             'email' => $fields['email'],
-            'phone_number' => $fields['phone_number'],
+            'number_phone' => $fields['number_phone'],
             'password' => Hash::make($request->password),
         ]);
         Auth::login($user);

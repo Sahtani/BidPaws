@@ -98,13 +98,14 @@
                                         @method('PATCH')
                                         @csrf
                                         @if ($user->access === 1)
-                                            <button type="submit"
-                                                class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Disable
-                                                Access</button>
+                                        <button
+                                        type="submit"class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Enable
+                                        Access</button>
                                         @else
-                                            <button
-                                                type="submit"class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Enable
-                                                Access</button>
+                                        <button type="submit"
+                                        class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Disable
+                                        Access</button>
+                                           
                                         @endif
                                     </form>
                                 </td>

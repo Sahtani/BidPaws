@@ -27,7 +27,7 @@ class AuthRequest extends FormRequest
             'image' => 'required|image',
             'email' => 'required|email|unique:users,email', 
             'password' => 'required|string|min:8',
-            'phone_number' => 'required|string|min:10', 
+            'number_phone' => 'required|string|min:10', 
         ];
     }
     

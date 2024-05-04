@@ -18,17 +18,16 @@ class RequestController extends Controller
     {
         $id = auth()->id();
         $annonces = ModelsRequest::where('user_id', $id)->with('annonce')->get();
-        // dd($annonces);
+
         // les demande d'adoption pour les annonce de user 
        
         $requests = DB::table('requests')
-        ->select('requests.status', 'send.name','send.role','send.image','send.id','send.created_at')
+        ->select('requests.status','requests.id', 'send.name','send.role','send.image','send.created_at')
         ->join('annonces', 'requests.annonce_id', '=', 'annonces.id')
         ->join('users as send', 'requests.user_id', '=', 'send.id')
         ->join('users as receiv', 'annonces.user_id', '=', 'receiv.id')
         ->where('annonces.user_id',$id)
         ->get();
-    
         
 
         return view('user.applications', compact('requests','annonces'));
@@ -55,5 +54,12 @@ class RequestController extends Controller
         $request->status = 'approved';
         $request->save();
         return back()->with('success', 'Request accepted successfully.');
+    }
+    public function rejectRequest( ModelsRequest $request)
+    {
+        $request->status = 'rejected';
+        $request->save();
+
+        return back()->with('success', 'Annonce rejected successfully.');
     }
 }

@@ -19,7 +19,7 @@
                         <form action="{{ route('login') }}" method="post">
                             @csrf
                             <div class="mb-4">
-                                <div class="flex items-center border-2 py-2 px-3 mb-4 rounded-md">
+                                <div class="flex items-center mt-0 border-2 py-2 px-3 mb-4 rounded-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                                     </svg>
@@ -43,21 +43,9 @@
                                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="text-950 font-semibold" for="remember">Remember me</label>
                                 </div>
-                                <div>
-                                    <p class="text-950 font-semibold"><a href="#">Forgot Password?</a></p>
-                                </div>
                             </div>
 
                             <button class="w-full bg-950 mt-4 py-2 text-white font-semibold rounded-full transition  duration-300">Log In</button>
-
-                            <div class="grid mt-4">
-                                <button class="group  py-2 px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
-                                    <div class="relative flex items-center space-x-4 justify-center">
-                                        <img src="https://tailus.io/sources/blocks/social/preview/images/google.svg" class="absolute left-0 w-5" alt="google logo">
-                                        <span class="block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">Continue with Google</span>
-                                    </div>
-                                </button>
-                            </div>
                         </form>
                     </div>
                 </div>

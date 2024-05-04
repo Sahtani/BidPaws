@@ -3,27 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+
+
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {  $user= Auth::user();
-        $categories = Category::all();
-        return view('admin.categories', compact('categories','user'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
-        //
+         $user= Auth::user();
+        $categories = $this->categoryRepository->getAllCategories();
+        return view('admin.categories', compact('categories','user'));
     }
 
     /**
@@ -31,30 +33,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData= $request->validate([
             'name' => 'required|string|unique:categories|max:255',
         ]);
 
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
+        $this->categoryRepository->createCategory($validatedData);
         return back()->with('success', 'Category created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -63,15 +47,11 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        $category = Category::findOrFail($id);
-
-        $category->name = $request->name;
-
-        $category->save();
+       $this->categoryRepository->updateCategory($id, $validatedData);
 
         return redirect()->route('admin.categories')->with('success', 'Category updated successfully');
     }
@@ -81,8 +61,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $cat = Category::findOrFail($id);
-        $cat->delete();
+        $this->categoryRepository->deleteCategory($id);
         return back()->with('success', 'Category delted successfully.');
     }
 }
