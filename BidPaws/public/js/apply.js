@@ -1,17 +1,16 @@
 
     $(document).ready(function () {
         $('#applyButton').click(function (event) {
-            event.preventDefault(); // Empêche le comportement par défaut du bouton submit
+            event.preventDefault(); 
 
             var form = $('#adoptionForm');
-            var formData = form.serialize(); // Récupère les données du formulaire
+            var formData = form.serialize(); 
 
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
                 data: formData,
                 success: function (data) {
-                    // Mettez à jour l'interface utilisateur pour refléter que la demande a été envoyée avec succès
                     $('#applyButton').html(`
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
@@ -24,7 +23,6 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    // Gérer les erreurs ici
                 }
             });
         });

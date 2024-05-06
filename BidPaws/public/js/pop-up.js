@@ -11,5 +11,5 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
             popup.style.display = 'none'; 
         }, 1000); 
-    }, 3000);
+    }, 2000);
 });
